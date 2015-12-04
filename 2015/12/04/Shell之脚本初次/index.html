@@ -29,7 +29,7 @@
 脚本例子
 
 变量关于变量的操作，主要碰到两个问题，一个是expect下面，用set方式来定义，而bash下">
-<meta property="og:updated_time" content="2015-12-04T09:12:30.000Z">
+<meta property="og:updated_time" content="2015-12-04T09:37:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell之脚本初次">
 <meta name="twitter:description" content="背景由于自己与服务器有很多台，可能由于需要重启服务等原因，每次都要到ssh登陆到远程机器，进行操作，这样子每次登陆都要输入命令，很麻烦。所以，我想通过脚本形式来解决ssh登陆的问题，这次脚本碰到的问题，也是由于这个产生的。  
@@ -169,10 +169,10 @@ done &lt; /Users/superheizai/shells/config
 <h3 id="脚本例子">脚本例子</h3><p>   这里把自己的写的脚本和相关文件贴出来，分为bash脚本和expect脚本，bash脚本会在内部调用expect脚本  </p>
 <ul>
 <li><p>配置文件config</p>
-<pre><code><span class="number">11</span>=<span class="number">10.199</span><span class="number">.250</span><span class="number">.11</span>  
-<span class="number">12</span>=<span class="number">10.199</span><span class="number">.250</span><span class="number">.12</span>  
-<span class="number">14</span>=<span class="number">10.199</span><span class="number">.250</span><span class="number">.14</span>  
-<span class="number">169</span>=<span class="number">10.199</span><span class="number">.239</span><span class="number">.169</span>  
+<pre><code>a=<span class="number">10.199</span><span class="class">.XXX</span><span class="class">.xx</span> 
+b=<span class="number">10.199</span><span class="class">.xxx</span><span class="class">.xx</span>  
+c=<span class="number">10.199</span><span class="class">.xxx</span><span class="class">.xx</span>  
+d=<span class="number">10.199</span><span class="class">.xxx</span><span class="class">.xx</span>  
 </code></pre></li>
 <li><p>login_expect.sh  </p>
 <pre><code><span class="comment">   #!/usr/bin/expect</span>
@@ -197,9 +197,9 @@ interact
 </ul>
 <pre><code><span class="shebang">#!/bin/bash
 </span>
-user=root
-<span class="built_in">pwd</span>=admin123
-server=<span class="string">"10.199.250.14"</span>
+user=user
+<span class="built_in">pwd</span>=<span class="built_in">pwd</span>
+server=<span class="string">"10.199.XXX.XX"</span>
 
 <span class="keyword">if</span> [[ <span class="variable">$#</span> <span class="operator">-eq</span> <span class="number">1</span> ]]; <span class="keyword">then</span>
 param=<span class="variable">$1</span>

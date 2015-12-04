@@ -10,13 +10,13 @@
  #!/usr/bin/expect 
 
    //2
-set user root 
-set pwd admin123
-set server 10.199.250.14
+set user user 
+set pwd pwd
+set server 10.199.XXX.XX
 
 
 //3
-spawn ssh $u">
+spawn ssh $user@$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shell之except模拟交互脚本">
 <meta property="og:url" content="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/index.html">
@@ -26,14 +26,14 @@ spawn ssh $u">
  #!/usr/bin/expect 
 
    //2
-set user root 
-set pwd admin123
-set server 10.199.250.14
+set user user 
+set pwd pwd
+set server 10.199.XXX.XX
 
 
 //3
-spawn ssh $u">
-<meta property="og:updated_time" content="2015-12-04T09:12:50.000Z">
+spawn ssh $user@$">
+<meta property="og:updated_time" content="2015-12-04T09:36:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell之except模拟交互脚本">
 <meta name="twitter:description" content="背景 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  
@@ -41,13 +41,13 @@ spawn ssh $u">
  #!/usr/bin/expect 
 
    //2
-set user root 
-set pwd admin123
-set server 10.199.250.14
+set user user 
+set pwd pwd
+set server 10.199.XXX.XX
 
 
 //3
-spawn ssh $u">
+spawn ssh $user@$">
   
     <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
   
@@ -124,9 +124,9 @@ spawn ssh $u">
 <pre><code> <span class="comment">#!/usr/bin/expect </span>
 
   <span class="comment"> //2</span>
-<span class="built_in">set</span> user root 
-<span class="built_in">set</span> pwd admin123
-<span class="built_in">set</span> server <span class="number">10.199</span><span class="number">.250</span><span class="number">.14</span>
+<span class="built_in">set</span> user user 
+<span class="built_in">set</span> pwd pwd
+<span class="built_in">set</span> server <span class="number">10.199</span>.XXX.XX
 
 <span class="comment">
 //3</span>
