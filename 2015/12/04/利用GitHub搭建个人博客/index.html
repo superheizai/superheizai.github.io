@@ -3,51 +3,36 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Shell之except模拟交互脚本 | superheizai的私人厨房</title>
+  <title>利用GitHub搭建个人博客 | superheizai的私人厨房</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  
-代码及其分析 先来一份代码示例      //1
- #!/usr/bin/expect 
+  <meta name="description" content="hexo设置hexo安装与设置
+nvm.sh设置，安装nvm的时候，会提示把nvm设置PATH中，并在PATH中运行nvm.sh
+node设置，node是npm和hexo运行的基础，所以必须先设置node的path
+npm设置
+hexo设置
 
-   //2
-set user user 
-set pwd pwd
-set server 10.199.XXX.XX
-
-
-//3
-spawn ssh $user@$">
+##">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell之except模拟交互脚本">
-<meta property="og:url" content="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/index.html">
+<meta property="og:title" content="利用GitHub搭建个人博客">
+<meta property="og:url" content="superheizai.github.io/2015/12/04/利用GitHub搭建个人博客/index.html">
 <meta property="og:site_name" content="superheizai的私人厨房">
-<meta property="og:description" content="背景 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  
-代码及其分析 先来一份代码示例      //1
- #!/usr/bin/expect 
+<meta property="og:description" content="hexo设置hexo安装与设置
+nvm.sh设置，安装nvm的时候，会提示把nvm设置PATH中，并在PATH中运行nvm.sh
+node设置，node是npm和hexo运行的基础，所以必须先设置node的path
+npm设置
+hexo设置
 
-   //2
-set user user 
-set pwd pwd
-set server 10.199.XXX.XX
-
-
-//3
-spawn ssh $user@$">
-<meta property="og:updated_time" content="2015-12-04T09:36:24.000Z">
+##">
+<meta property="og:updated_time" content="2015-12-04T15:09:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shell之except模拟交互脚本">
-<meta name="twitter:description" content="背景 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  
-代码及其分析 先来一份代码示例      //1
- #!/usr/bin/expect 
+<meta name="twitter:title" content="利用GitHub搭建个人博客">
+<meta name="twitter:description" content="hexo设置hexo安装与设置
+nvm.sh设置，安装nvm的时候，会提示把nvm设置PATH中，并在PATH中运行nvm.sh
+node设置，node是npm和hexo运行的基础，所以必须先设置node的path
+npm设置
+hexo设置
 
-   //2
-set user user 
-set pwd pwd
-set server 10.199.XXX.XX
-
-
-//3
-spawn ssh $user@$">
+##">
   
     <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
   
@@ -93,14 +78,14 @@ spawn ssh $user@$">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Shell之except模拟交互脚本" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-利用GitHub搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/12/04/Shell之except模拟交互脚本/" class="article-date">
-  <time datetime="2015-12-04T08:55:15.000Z" itemprop="datePublished">2015-12-04</time>
+    <a href="/2015/12/04/利用GitHub搭建个人博客/" class="article-date">
+  <time datetime="2015-12-04T14:55:27.000Z" itemprop="datePublished">2015-12-04</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Shell/">Shell</a>
+    <a class="article-category-link" href="/categories/git/">git</a>
   </div>
 
   </div>
@@ -111,7 +96,7 @@ spawn ssh $user@$">
         
   
     <h1 class="article-title" itemprop="name">
-      Shell之except模拟交互脚本
+      利用GitHub搭建个人博客
     </h1>
   
 
@@ -119,60 +104,21 @@ spawn ssh $user@$">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="背景">背景</h2><p> 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  </p>
-<h2 id="代码及其分析">代码及其分析</h2><p> 先来一份代码示例<br>      //1</p>
-<pre><code> <span class="comment">#!/usr/bin/expect </span>
-
-  <span class="comment"> //2</span>
-<span class="built_in">set</span> user user 
-<span class="built_in">set</span> pwd pwd
-<span class="built_in">set</span> server <span class="number">10.199</span>.XXX.XX
-
-<span class="comment">
-//3</span>
-spawn ssh $user@$server -p <span class="number">22</span><span class="comment">
-//9 </span>
-send_user <span class="string">"start ssh\n"</span><span class="comment">
-//4</span>
-expect  {
-   <span class="string">"*password:"</span> {<span class="built_in">send</span> $pwd\r}
-   <span class="string">"yes/no"</span> {<span class="built_in">send</span> <span class="string">"yes\r"</span>}
-}
-expect <span class="string">"]#"</span><span class="comment">
-//10</span>
-log_file log_result<span class="comment">
-//5</span>
-<span class="built_in">send</span> <span class="string">"ps -ef\r"</span><span class="comment">
-//6  </span>
-<span class="built_in">send</span> <span class="string">"ret=`echo $?`\r"</span>
-<span class="built_in">send</span> <span class="string">"exit \$ret\r"</span><span class="comment">
-//7</span>
-<span class="comment">#interact</span><span class="comment">
-//8</span>
-<span class="comment">#expect eof</span>
-</code></pre><p>这里简单介绍下我的这段代码：  </p>
-<ol>
-<li>定义此脚本是通过/usr/bin/expect来执行。如果没有这行直接执行，会告诉你spawn，send等命令找不到  </li>
-<li>此处的代码是设置shell里面的变量  </li>
-<li>spawn命令会启动一个进程，用来给ssh运行进程加个壳，传递交互指令。再强调一次，spawn是进入expect之后才可以看到的指令，用which spawn是看不到spawn命令的  </li>
-<li>expect可以有一个或者多个返回，多个返回的时候可以用{}括起来对不同情况的处理，一个返回的时候，直接就省略掉{}.expect多个返回时候，”{“必须和expect同一行    </li>
-<li>发送执行命令指令  </li>
-<li>这里是希望看到执行结果，所以我用了$?这个上次执行结果输出到变量  </li>
-<li>这个指令是指继续留在SSH登陆状态,这里以内执行了exit，直接退出了,interact不起作用  </li>
-<li>执行结束标示，在spawn进程结束后会给expect发送eof  </li>
-<li>给用户提示信息，只作纯文本的提示，像echo一样  </li>
-<li><p>log_file filename会把日志打到filename文本里面，默认是append，所以会有文件大小问题</p>
-<p>一些参考资料<br><a href="http://blog.chinaunix.net/uid-15007890-id-273604.html" target="_blank" rel="external"> expect学习笔记及实例详解 </a><br><a href="http://zhidao.baidu.com/link?url=NTNequSIXB5Hq38HGD1lxCTIXxaC8kKZQUZdNj-EGhu6JZmWMLFyOQmiPdZ4DW-lp0p_rJjzF8MU5tBkVwuaPq" target="_blank" rel="external">通过wait获取返回值</a><br><a href="http://stackoverflow.com/questions/23614039/how-to-get-the-exit-code-of-spawned-process-in-expect-shell-script" target="_blank" rel="external">expect-return-code</a></p>
-</li>
-</ol>
+        <h1 id="hexo设置">hexo设置</h1><h2 id="hexo安装与设置">hexo安装与设置</h2><ul>
+<li>nvm.sh设置，安装nvm的时候，会提示把nvm设置PATH中，并在PATH中运行nvm.sh</li>
+<li>node设置，node是npm和hexo运行的基础，所以必须先设置node的path</li>
+<li>npm设置</li>
+<li>hexo设置</li>
+</ul>
+<p>##</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/" data-id="cihrt5f8z000lvn4hy6xsc35m" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/利用GitHub搭建个人博客/" data-id="cihrt5f8s0005vn4hpa2ah9a0" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/expect/">expect</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
 
     </footer>
   </div>
@@ -180,19 +126,10 @@ log_file log_result<span class="comment">
     
 <nav id="article-nav">
   
-    <a href="/2015/12/04/利用GitHub搭建个人博客/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          利用GitHub搭建个人博客
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/12/04/Shell之定时任务/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/12/04/Shell之except模拟交互脚本/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Shell之定时任务</div>
+      <div class="article-nav-title">Shell之except模拟交互脚本</div>
     </a>
   
 </nav>
