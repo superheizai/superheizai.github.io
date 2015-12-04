@@ -5,37 +5,31 @@
   
   <title>Git 多Repo配置 | superheizai的私人厨房</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#GIT：多GIT REPO SSH KEY问题解决
-##生成ssh key
-ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
+  <meta name="description" content="在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：
+生成ssh keyssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
 
 -C ：指的是目标GIT repo的用户名
 -f ：指的是生成密钥的本地地址
-   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对应的GIT repo配置
-#">
+   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 多Repo配置">
 <meta property="og:url" content="superheizai.github.io/2015/12/04/Git-多Repo配置/index.html">
 <meta property="og:site_name" content="superheizai的私人厨房">
-<meta property="og:description" content="#GIT：多GIT REPO SSH KEY问题解决
-##生成ssh key
-ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
+<meta property="og:description" content="在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：
+生成ssh keyssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
 
 -C ：指的是目标GIT repo的用户名
 -f ：指的是生成密钥的本地地址
-   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对应的GIT repo配置
-#">
-<meta property="og:updated_time" content="2015-12-04T05:10:10.000Z">
+   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对">
+<meta property="og:updated_time" content="2015-12-04T09:28:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 多Repo配置">
-<meta name="twitter:description" content="#GIT：多GIT REPO SSH KEY问题解决
-##生成ssh key
-ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
+<meta name="twitter:description" content="在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：
+生成ssh keyssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
 
 -C ：指的是目标GIT repo的用户名
 -f ：指的是生成密钥的本地地址
-   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对应的GIT repo配置
-#">
+   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对">
   
     <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
   
@@ -87,6 +81,10 @@ ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
   <time datetime="2015-12-04T05:08:24.000Z" itemprop="datePublished">2015-12-04</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git-repo/">git repo</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -103,29 +101,29 @@ ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#GIT：多GIT REPO SSH KEY问题解决</p>
-<p>##生成ssh key</p>
-<pre><code>ssh-keygen -t rsa -C <span class="string">"superheizai"</span> <span class="operator">-f</span> ~/.ssh/github
+        <p>在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：</p>
+<h2 id="生成ssh_key">生成ssh key</h2><pre><code>ssh-keygen -t rsa -C <span class="string">"superheizai"</span> <span class="operator">-f</span> ~/.ssh/github
 
 -C ：指的是目标GIT repo的用户名
 <span class="operator">-f</span> ：指的是生成密钥的本地地址
 </code></pre><p>   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对应的GIT repo配置</p>
-<p>##定义config</p>
-<p>  在.ssh下面生成一个config文件，里面配置如下信息：    </p>
+<h2 id="定义config">定义config</h2><p>  在.ssh下面生成一个config文件，里面配置如下信息：    </p>
 <pre><code>host github<span class="class">.com</span> <span class="id">#GIT</span> REPO域名，比如git@github.com中的github<span class="class">.com</span>
  user git  #用户，一般都是这个,比如git@github.com中的git
  hostname github<span class="class">.com</span>  #可选，指向域名，比如git@github.com中的github<span class="class">.com</span>
  port <span class="number">22</span>  #端口，一般不变
  identityfile ~/.ssh/github <span class="id">#ssh</span> key生成的时候，文件路径
-</code></pre><p>##测试连通性<br> ssh -T host # host是config里面定义的host</p>
+</code></pre><h2 id="测试连通性">测试连通性</h2><p> ssh -T host # host是config里面定义的host</p>
 <p> 如果提示连通，说明生效了  </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="cihrfvxzg0000694h2jrrvjwz" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="cihrgfm940000pa4hmn8wu7ne" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git-多repo-config/">git 多repo config</a></li></ul>
+
     </footer>
   </div>
   
@@ -142,11 +140,6 @@ ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
     </a>
   
   
-    <a href="/2015/12/04/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
 </nav>
 
   
@@ -160,7 +153,7 @@ ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git-repo/">git repo</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -169,7 +162,7 @@ ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell-脚本/">Shell 脚本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron-定时任务/">cron 定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell-脚本/">Shell 脚本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron-定时任务/">cron 定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-多repo-config/">git 多repo config</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -178,7 +171,7 @@ ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Shell-脚本/" style="font-size: 10px;">Shell 脚本</a> <a href="/tags/cron-定时任务/" style="font-size: 10px;">cron 定时任务</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a>
+      <a href="/tags/Shell-脚本/" style="font-size: 10px;">Shell 脚本</a> <a href="/tags/cron-定时任务/" style="font-size: 10px;">cron 定时任务</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git-多repo-config/" style="font-size: 10px;">git 多repo config</a>
     </div>
   </div>
 
@@ -187,7 +180,7 @@ ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -212,10 +205,6 @@ ssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
         
           <li>
             <a href="/2015/12/04/Git-多Repo配置/">Git 多Repo配置</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/04/hello-world/">Hello World</a>
           </li>
         
       </ul>

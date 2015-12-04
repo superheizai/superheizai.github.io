@@ -5,31 +5,28 @@
   
   <title>Shell之定时任务 | superheizai的私人厨房</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#shell之cron定时任务脚本
-##crond服务crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  
+  <meta name="description" content="crond服务crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  
 定时任务服务的操作：
 /sbin/service crond start           //启动服务
 /sbin/service crond stop            //关闭服务
-/sbin/service cr">
+/sbin/service crond restart        /">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shell之定时任务">
 <meta property="og:url" content="superheizai.github.io/2015/12/04/Shell之定时任务/index.html">
 <meta property="og:site_name" content="superheizai的私人厨房">
-<meta property="og:description" content="#shell之cron定时任务脚本
-##crond服务crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  
+<meta property="og:description" content="crond服务crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  
 定时任务服务的操作：
 /sbin/service crond start           //启动服务
 /sbin/service crond stop            //关闭服务
-/sbin/service cr">
-<meta property="og:updated_time" content="2015-12-04T08:56:05.000Z">
+/sbin/service crond restart        /">
+<meta property="og:updated_time" content="2015-12-04T09:13:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell之定时任务">
-<meta name="twitter:description" content="#shell之cron定时任务脚本
-##crond服务crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  
+<meta name="twitter:description" content="crond服务crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  
 定时任务服务的操作：
 /sbin/service crond start           //启动服务
 /sbin/service crond stop            //关闭服务
-/sbin/service cr">
+/sbin/service crond restart        /">
   
     <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
   
@@ -101,16 +98,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#shell之cron定时任务脚本</p>
-<p>##crond服务<br>crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  </p>
+        <h2 id="crond服务">crond服务</h2><p>crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  </p>
 <p>定时任务服务的操作：</p>
 <pre><code><span class="regexp">/sbin/</span>service crond start           <span class="comment">//启动服务</span>
 <span class="regexp">/sbin/</span>service crond stop            <span class="comment">//关闭服务</span>
 <span class="regexp">/sbin/</span>service crond restart        <span class="comment">//重启服务</span>
 <span class="regexp">/sbin/</span>service crond reload         <span class="comment">//重新载入配置</span>
 <span class="regexp">/sbin/</span>service crond status        <span class="comment">//查看服务状态  </span>
-</code></pre><p>##crond介绍    </p>
-<p>crontab在/etc目录下面，存在以下目录及文件  </p>
+</code></pre><h2 id="crond介绍">crond介绍</h2><p>crontab在/etc目录下面，存在以下目录及文件  </p>
 <ul>
 <li>cron.hourly</li>
 <li>cron.daily</li>
@@ -121,25 +116,24 @@
 <li>cron.deny</li>
 <li>cron.allow</li>
 </ul>
-<p>###目录<br>前五个是目录，前四种顾名思义，不用解释。cron.d是系统自动定期需要做的任务,但是又不是按小时,按天,按星期,按月来执行的,那么就放在这个目录下面.  </p>
-<p>###文件<br>crontab文件一般如下:  </p>
+<h3 id="目录">目录</h3><p>前五个是目录，前四种顾名思义，不用解释。cron.d是系统自动定期需要做的任务,但是又不是按小时,按天,按星期,按月来执行的,那么就放在这个目录下面.  </p>
+<h3 id="文件">文件</h3><p>crontab文件一般如下:  </p>
 <pre><code>01 <span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span> root run-parts /etc/cron.hourly
 02 4 <span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span> root run-parts /etc/cron.daily
 22 4 <span class="keyword">*</span> <span class="keyword">*</span> 0 root run-parts /etc/cron.weekly
 42 4 1 <span class="keyword">*</span> <span class="keyword">*</span> root run-parts /etc/cron.monthly
 </code></pre><p>我们可在此文件中添加自己需要的cron job.  </p>
-<p>####crontab的限制<br>　　cron.allow：将可以使用 crontab 的帐号写入其中，若不在这个文件内的使用者则不可使用 crontab；</p>
+<h4 id="crontab的限制">crontab的限制</h4><p>　　cron.allow：将可以使用 crontab 的帐号写入其中，若不在这个文件内的使用者则不可使用 crontab；</p>
 <p>　　cron.deny：将不可以使用 crontab 的帐号写入其中，若未记录到这个文件当中的使用者，就可以使用 crontab 。</p>
 <p>以优先顺序来说， /etc/cron.allow 比 /etc/cron.deny 要优先， 而判断上面，这两个文件只选择一个来限制而已，因此，建议你只要保留一个即可， 免得影响自己在配置上面的判断！一般来说，系统默认是保留 /etc/cron.deny ， 你可以将不想让他运行 crontab 的那个使用者写入 /etc/cron.deny 当中，一个帐号一行！</p>
-<p>##定时任务定制  </p>
-<pre><code>crontab [-u username] [-l|-e|-r]
+<h2 id="定时任务定制">定时任务定制</h2><pre><code>crontab [-u username] [-l|-e|-r]
 选项与参数：
 -<span class="ruby">u  ：只有 root 才能进行这个任务，亦即帮其他使用者创建/移除 crontab 工作排程；
 </span>-<span class="ruby">e  ：编辑 crontab 的工作内容
 </span>-<span class="ruby">l  ：查阅 crontab 的工作内容
 </span>-<span class="ruby">r  ：移除所有的 crontab 的工作内容，若仅要移除一项，请用 -e 去编辑</span>
 </code></pre><p>我们一般使用crontab -e 来进行编辑任务，输入这个命令后，会以vi打开当前任务，退出保存的时候，也会提示当前定时任务已经更新。<br>  个人的定时任务全部保存在/var/spool/cron目录下面，会生成以当前用户名的名称的个人任务列表。<br>  cron运行的每一项工作都会被记录到/var/log/cron里面，可以在里面查看运行的定时任务记录。</p>
-<p>##定时任务语法<br>在启动定时任务<br>crontab的格式讲解<br>每项工作 (每行) 的格式都是具有六个栏位，这六个栏位的意义为：<br>代表意义    分钟    小时    日期    月份    周<br>数字范围    0-59    0-23    1-31    1-12    0-7    </p>
+<h2 id="定时任务语法">定时任务语法</h2><p>在启动定时任务<br>crontab的格式讲解<br>每项工作 (每行) 的格式都是具有六个栏位，这六个栏位的意义为：<br>代表意义    分钟    小时    日期    月份    周<br>数字范围    0-59    0-23    1-31    1-12    0-7    </p>
 <p>注意两点：  </p>
 <ul>
 <li>周的数字为 0 或 7 时，都代表『星期天』的意思  </li>
@@ -152,16 +146,14 @@
 <li>-: 减号代表一段时间范围内，比如20 8-12 <em> </em> * command，代表8点20到12点20 </li>
 <li>/n: n 代表数字，每隔n单位间隔的意思，<em>/5 </em> <em> </em> * command，每隔5分钟</li>
 </ul>
-<p>##注意事项</p>
-<ul>
+<h2 id="注意事项">注意事项</h2><ul>
 <li>环境变量，在要执行的脚本里面，要去source下环境变量，否则很多命令看不到  </li>
 <li>尽量使用绝对路径，不用相对路径，避免不必要的麻烦   </li>
 <li>``执行命令</li>
 <li>当程序在你所指定的时间执行后，系统会寄一封信给你，显示该程序执行的内容，若是你不希望收到这样的信，请在每一行空一格之后加上 &gt; /dev/null 2&gt;&amp;1 即可</li>
 <li>run-parts是系统命令，全名/usr/bin/run-parts，后跟目录名，执行某一路径下全部命令</li>
 </ul>
-<p>##自己脚本例子</p>
-<pre><code><span class="shebang">#!/bin/bash</span>
+<h2 id="自己脚本例子">自己脚本例子</h2><pre><code><span class="shebang">#!/bin/bash</span>
 <span class="comment"># source环境变量，让命令和变量在cron脚本可见</span>
 <span class="built_in">source</span> /root/.bashrc
 <span class="built_in">source</span> /etc/profile
@@ -177,12 +169,12 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
 <span class="built_in">echo</span> <span class="string">"start penguin `date -d today +"</span>%Y-%m-%d %T<span class="string">"`"</span> &gt;&gt; /opt/scan_<span class="built_in">log</span>
 `<span class="built_in">cd</span> /apps/penguin-penguin4sdk;rm -rf RUNNING_PID;<span class="built_in">cd</span> bin;chmod <span class="number">777</span>     penguin;./penguin -Denv=stage -Dhttp.port=<span class="number">9000</span>  -Dconfig.file=../    conf/penguin.conf -Dlogger.file=conf/penguin-logger.xml &gt; /tmp/    penguinForleo_nohup.out &amp;`
 <span class="keyword">fi</span>
-</code></pre><p>##参考资料<br><a href="http://www.cnblogs.com/ggjucheng/archive/2012/08/19/2646763.html" target="_blank" rel="external">cron实用手册</a><br><a href="http://www.cnblogs.com/kerrycode/p/3238346.html" target="_blank" rel="external">cron定时任务配置</a><br><a href=""></a><br><a href=""></a></p>
+</code></pre><h2 id="参考资料">参考资料</h2><p><a href="http://www.cnblogs.com/ggjucheng/archive/2012/08/19/2646763.html" target="_blank" rel="external">cron实用手册</a><br><a href="http://www.cnblogs.com/kerrycode/p/3238346.html" target="_blank" rel="external">cron定时任务配置</a><br><a href=""></a><br><a href=""></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之定时任务/" data-id="cihrfvy0f0007694hlugtul7g" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之定时任务/" data-id="cihrgfm9l0006pa4hq5tzluzy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cron-定时任务/">cron 定时任务</a></li></ul>
@@ -221,7 +213,7 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git-repo/">git repo</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -230,7 +222,7 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell-脚本/">Shell 脚本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron-定时任务/">cron 定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell-脚本/">Shell 脚本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron-定时任务/">cron 定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-多repo-config/">git 多repo config</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -239,7 +231,7 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Shell-脚本/" style="font-size: 10px;">Shell 脚本</a> <a href="/tags/cron-定时任务/" style="font-size: 10px;">cron 定时任务</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a>
+      <a href="/tags/Shell-脚本/" style="font-size: 10px;">Shell 脚本</a> <a href="/tags/cron-定时任务/" style="font-size: 10px;">cron 定时任务</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git-多repo-config/" style="font-size: 10px;">git 多repo config</a>
     </div>
   </div>
 
@@ -248,7 +240,7 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -273,10 +265,6 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
         
           <li>
             <a href="/2015/12/04/Git-多Repo配置/">Git 多Repo配置</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/04/hello-world/">Hello World</a>
           </li>
         
       </ul>
