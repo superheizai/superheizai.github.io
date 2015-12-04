@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Shell之except模拟交互脚本 | superheizai的私人厨房</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#Expect
+##背景
+ 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  
+##代码及其分析  
+ 先来一份代码示例      //1
+ #!/usr/bin/expect 
+
+   //2
+set user root 
+set pwd admin123
+set server 10.199.250.14">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell之except模拟交互脚本">
+<meta property="og:url" content="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/index.html">
+<meta property="og:site_name" content="superheizai的私人厨房">
+<meta property="og:description" content="#Expect
+##背景
+ 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  
+##代码及其分析  
+ 先来一份代码示例      //1
+ #!/usr/bin/expect 
+
+   //2
+set user root 
+set pwd admin123
+set server 10.199.250.14">
+<meta property="og:updated_time" content="2015-12-04T08:57:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shell之except模拟交互脚本">
+<meta name="twitter:description" content="#Expect
+##背景
+ 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  
+##代码及其分析  
+ 先来一份代码示例      //1
+ #!/usr/bin/expect 
+
+   //2
+set user root 
+set pwd admin123
+set server 10.199.250.14">
+  
+    <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">superheizai的私人厨房</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="superheizai.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Shell之except模拟交互脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/04/Shell之except模拟交互脚本/" class="article-date">
+  <time datetime="2015-12-04T08:55:15.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Shell之except模拟交互脚本
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Expect</p>
+<p>##背景</p>
+<p> 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  </p>
+<p>##代码及其分析  </p>
+<p> 先来一份代码示例<br>      //1</p>
+<pre><code> <span class="comment">#!/usr/bin/expect </span>
+
+  <span class="comment"> //2</span>
+<span class="built_in">set</span> user root 
+<span class="built_in">set</span> pwd admin123
+<span class="built_in">set</span> server <span class="number">10.199</span><span class="number">.250</span><span class="number">.14</span>
+
+<span class="comment">
+//3</span>
+spawn ssh $user@$server -p <span class="number">22</span><span class="comment">
+//9 </span>
+send_user <span class="string">"start ssh\n"</span><span class="comment">
+//4</span>
+expect  {
+   <span class="string">"*password:"</span> {<span class="built_in">send</span> $pwd\r}
+   <span class="string">"yes/no"</span> {<span class="built_in">send</span> <span class="string">"yes\r"</span>}
+}
+expect <span class="string">"]#"</span><span class="comment">
+//10</span>
+log_file log_result<span class="comment">
+//5</span>
+<span class="built_in">send</span> <span class="string">"ps -ef\r"</span><span class="comment">
+//6  </span>
+<span class="built_in">send</span> <span class="string">"ret=`echo $?`\r"</span>
+<span class="built_in">send</span> <span class="string">"exit \$ret\r"</span><span class="comment">
+//7</span>
+<span class="comment">#interact</span><span class="comment">
+//8</span>
+<span class="comment">#expect eof</span>
+</code></pre><p>这里简单介绍下我的这段代码：  </p>
+<ol>
+<li>定义此脚本是通过/usr/bin/expect来执行。如果没有这行直接执行，会告诉你spawn，send等命令找不到  </li>
+<li>此处的代码是设置shell里面的变量  </li>
+<li>spawn命令会启动一个进程，用来给ssh运行进程加个壳，传递交互指令。再强调一次，spawn是进入expect之后才可以看到的指令，用which spawn是看不到spawn命令的  </li>
+<li>expect可以有一个或者多个返回，多个返回的时候可以用{}括起来对不同情况的处理，一个返回的时候，直接就省略掉{}.expect多个返回时候，”{“必须和expect同一行    </li>
+<li>发送执行命令指令  </li>
+<li>这里是希望看到执行结果，所以我用了$?这个上次执行结果输出到变量  </li>
+<li>这个指令是指继续留在SSH登陆状态,这里以内执行了exit，直接退出了,interact不起作用  </li>
+<li>执行结束标示，在spawn进程结束后会给expect发送eof  </li>
+<li>给用户提示信息，只作纯文本的提示，像echo一样  </li>
+<li><p>log_file filename会把日志打到filename文本里面，默认是append，所以会有文件大小问题</p>
+<p>一些参考资料<br><a href="http://blog.chinaunix.net/uid-15007890-id-273604.html" target="_blank" rel="external"> expect学习笔记及实例详解 </a><br><a href="http://zhidao.baidu.com/link?url=NTNequSIXB5Hq38HGD1lxCTIXxaC8kKZQUZdNj-EGhu6JZmWMLFyOQmiPdZ4DW-lp0p_rJjzF8MU5tBkVwuaPq" target="_blank" rel="external">通过wait获取返回值</a><br><a href="http://stackoverflow.com/questions/23614039/how-to-get-the-exit-code-of-spawned-process-in-expect-shell-script" target="_blank" rel="external">expect-return-code</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/" data-id="cihrfvy0k000b694hegxws1yg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/expect/">expect</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/04/Shell之定时任务/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Shell之定时任务</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell-脚本/">Shell 脚本</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron-定时任务/">cron 定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Shell-脚本/" style="font-size: 10px;">Shell 脚本</a> <a href="/tags/cron-定时任务/" style="font-size: 10px;">cron 定时任务</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/12/04/Shell之except模拟交互脚本/">Shell之except模拟交互脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/04/Shell之定时任务/">Shell之定时任务</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/04/Shell之脚本初次/">Shell之脚本初次</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/04/Git-多Repo配置/">Git 多Repo配置</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/04/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 ；刘建刚<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
