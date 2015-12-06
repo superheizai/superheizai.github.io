@@ -61,6 +61,46 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cut命令使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/06/cut命令使用/" class="article-date">
+  <time datetime="2015-12-06T15:13:10.000Z" itemprop="datePublished">2015-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: cut命令使用<br>date: 2015-12-06 22:42:11<br>tags: cut</p>
+<h2 id="categories:_Shell">categories: Shell</h2><p>之前，我们针对行，针对分隔符，抽取某列数据，一般会用awk命令  </p>
+<pre><code><span class="title">awk</span> -F<span class="string">'='</span> <span class="string">'{print <span class="variable">$1</span>}'</span> filename
+</code></pre><p>今天，突然发现对于抽取某一列的情况可以使用cut命令解决这个问题  </p>
+<pre><code>cut <span class="operator">-d</span><span class="string">'='</span> <span class="operator">-f</span> <span class="number">1</span> filename  
+</code></pre><p>但是，cut的使用场景是有限制的  </p>
+<ul>
+<li>分隔符是单字符  </li>
+<li>只获取一个结果列  </li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/06/cut命令使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/06/cut命令使用/" data-id="cihuo5jkj000elr4h5f385jol" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-利用GitHub搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/04/利用GitHub搭建个人博客/" class="article-date">
@@ -98,7 +138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/利用GitHub搭建个人博客/" data-id="cihrt5f8s0005vn4hpa2ah9a0" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/利用GitHub搭建个人博客/" data-id="cihuo5jkh0009lr4hfqtx6yx1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
@@ -186,7 +226,7 @@ log_file log_result<span class="comment">
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/" data-id="cihrt5f8z000lvn4hy6xsc35m" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/" data-id="cihuo5jkp000slr4hpmxgbo47" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/expect/">expect</a></li></ul>
@@ -300,7 +340,7 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之定时任务/" data-id="cihrt5f8x000hvn4hn64yngpb" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之定时任务/" data-id="cihuo5jkn000mlr4hb49n1z77" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cron/">cron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/定时任务/">定时任务</a></li></ul>
@@ -460,7 +500,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之脚本初次/" data-id="cihrt5f8v000cvn4haax8ymwp" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之脚本初次/" data-id="cihuo5jkk000flr4he9dbun14" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/脚本/">脚本</a></li></ul>
@@ -516,7 +556,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="cihrt5f8e0000vn4hvohpz4wy" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="cihuo5jjr0000lr4hynpbwgv4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多repo/">多repo</a></li></ul>
@@ -564,7 +604,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -574,6 +614,10 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/06/cut命令使用/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2015/12/04/利用GitHub搭建个人博客/">利用GitHub搭建个人博客</a>
@@ -589,10 +633,6 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
         
           <li>
             <a href="/2015/12/04/Shell之脚本初次/">Shell之脚本初次</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/04/Git-多Repo配置/">Git 多Repo配置</a>
           </li>
         
       </ul>
