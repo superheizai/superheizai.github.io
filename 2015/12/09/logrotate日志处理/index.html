@@ -15,7 +15,7 @@
 <meta property="og:description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
 
 在anacrontab中定义了执行cron.daily下面的所有文件(run-parts)run-parts">
-<meta property="og:updated_time" content="2015-12-10T01:52:54.000Z">
+<meta property="og:updated_time" content="2015-12-10T01:56:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="logrotate日志处理">
 <meta name="twitter:description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
@@ -119,55 +119,102 @@ EXITVALUE=$?
 </span>    详细信息
 </code></pre><p>-d 选项可以让我们在执行前验证下脚本正确性，但是-d不会真实执行<br>-f 选项可以让我们在等不及定时任务执行的情况下，让我们可以手动执行<br>-v 查看详细执行过程，验证脚本正确性<br>这里所述的三个参数，可以让我们可以预先执行脚本，验证脚本的正确性或者不依赖cron任务，强制执行logrotate  </p>
 <pre><code>logrotate -dvf /opt/logroate_self<span class="class">.conf</span>  
-</code></pre><h2 id="常用命令">常用命令</h2><p>###rotate COUNT<br>    轮转COUNT次，也就是最多保留COUNT个轮转备份。<br>    超出的被删除或邮寄。<br>    设置为0，则不保存轮转的老日志。  </p>
-<p>###start COUNT<br>    轮转文件名基于这个数字。<br>    例如，指定0时，原日志文件轮转的备份文件以.0为扩展名，如果指定9，就直接从.9开始跳过0-8<br>    然后再继续向后轮转rotate指定的次数。  </p>
-<p>###compress<br>    默认使用gzip压缩老日志  </p>
-<p>###nocompress<br>    不压缩老日志  </p>
-<p>###compresscmd<br>    指定压缩命令，默认gzip  </p>
-<p>###uncompresscmd<br>    指定解压命令，默认gunzip  </p>
-<p>###compressext<br>    如果启用了压缩，指定在压缩了的日志文件上使用哪个扩展。默认随配置的压缩命令  </p>
-<p>###compressoptions<br>    可以传送命令行选项给压缩程序，默认的gzip使用-9选项(最大压缩率)  </p>
-<p>###delaycompress<br>    延迟到下次轮转时压缩之前的日志文件。<br>    需要与compress项连用，当程序有时不能关闭写日志文件时可使用此项。  </p>
-<p>###nodelaycompress<br>    不延迟压缩    </p>
-<p>###copy<br>    拷贝日志文件，不修改原有文件。<br>    给当前日志文件做快照，或其他工具需要截断或解析文件时，可使用此项<br>    使用此项时，create项就没用了，因为老日志文件占着位置  </p>
-<p>###nocopy<br>    留下原日志文件而不复制  </p>
-<p>###copytruncate<br>    在创建了拷贝后截断原日志文件到0大小，而不是用移动就日志文件再创建新文件的方法。<br>    可用于日志一些程序不关闭日志文件一直写的情况。<br>    注意，在拷贝文件和截断文件时有一个非常小的时间片，所以可能会丢失日志信息。<br>    使用此项时，create无效  </p>
-<p>###nocopytruncate<br>    创建拷贝后不截断原日志文件  </p>
-<p>###create MODE OWNER GROUP<br>    在轮转动作之后，postrotate脚本执行之前，立即使用刚轮转的日志文件名创建日志文件。<br>    MODE 指定日志文件的权限(0660之类)<br>    OWNER 指定日志文件的属主<br>    GROUP 指定日志文件的属组<br>    可省略任何上述属性，省略的属性从原文件继承，可使用nocreate项来关闭  </p>
-<p>###nocreate<br>    不创建新的日志文件    </p>
-<p>###daily<br>    每天轮转日志文件  </p>
-<p>###weekly<br>    如果当前的星期几比上次轮转的星期几少，或者过了一个多星期，就会发生轮转<br>    通常是在每周的第一天轮转，如果logrotate不是每天运行的，会在第一次有机会时进行轮转。  </p>
-<p>###monthly<br>    一月中logrotate第一次运行时进行轮转(通常是一月的第一天)  </p>
-<p>###yearly<br>    如果当前年份不同于上次轮转的年份，则进行日志轮转    </p>
-<p>###dateext<br>    归档旧日志文件时，文件名添加YYYYMMDD形式日期，可用dateformat选项扩展配置。  </p>
-<p>###nodateext<br>    不使用dateext扩展名  </p>
-<p>###dateformat FORMAT_STRING<br>    使用strftime(3)类似的格式指定dateext的格式，只允许%Y %m %d和%s指定符。<br>    默认为 -%Y%m%d。<br>    注意：扩展中分割日志的字符也是日期格式的一部分，<br>    系统时钟需要设置到2001-09-09之后，%s才能正确工作  </p>
-<p>###extension EXT<br>    日志文件可在轮转后使用指定的EXT扩展名。<br>    如果使用压缩，通常EXT后还会加上压缩文件的扩展名，通常是.gz。<br>    例如想把mylog.foo轮转为mylog.1.foo.gz而不是mylog.foo.1.gz    </p>
-<p>###ifempty<br>    默认项，即使日志是空的也进行轮转，覆盖notifempty项  </p>
-<p>###notifempty<br>    如果日志为空，则不进行轮转    </p>
-<p>###include FILE_OR_DIRECTORY<br>    读取include指令下的文件。<br>    如果是目录，在继续处理包含的文件之前，按字母顺序读取目录下大部分文件(只读取普通文件)<br>        目录或管道文件等，还有使用指定扩展名的文件不读取<br>        用tabooext指令定义禁忌扩展名。<br>    include指令不能出现在日志文件定义中。  </p>
-<p>###tabooext [+] LIST<br>    修改当前禁忌扩展名列表。<br>    如果列表前使用了+，表示将LIST加到当前列表中，否则就替换当前列表。<br>    默认包含：.rpmorig, .rpmsave, .v, .swp, .dpkg-dist, .dpkg-old, .dpkg-new, .disabled    </p>
-<p>###mail ADDRESS<br>    当日志轮转超过保留数时，多出的会mail到ADDRESS。<br>    可在log定义中使用nomail指令来不邮寄该log  </p>
-<p>###nomail<br>    不邮寄日志  </p>
-<p>###mailfirst<br>    与mail指令连用，邮寄刚轮转的日志，而不是期满的日志(超出数量要被删除的)  </p>
-<p>###maillast<br>    默认项，与mail连用，邮寄超出rotate数量要被删除的日志。    </p>
-<p>###maxage COUNT<br>    删除COUNT天前的轮转备份。<br>    只在轮转动作时检查日志文件的时间戳。<br>    如果配置了maillast和mail指令，删除的轮转备份会被邮寄。  </p>
-<p>###minsize SIZE<br>    日志文件增长到超过SIZE bytes时进行轮转，但不会在额外指定的时间间隔之前(daily，weekly等)。<br>    相关的size指令与其类似，但size与间隔指令互斥，不考虑时间而直接进行轮转。<br>    而minsize指令要考虑大小和时间戳。  </p>
-<p>###size SIZE<br>    超过SIZE时轮转，SIZE默认单位是KB，可使用M，G来指定MB和GB。  </p>
-<p>###shred<br>    默认关闭<br>    删除文件使用shred -u(销毁)而不是unlink()系统调用。<br>    可确保删除日志后，文件不可读(对磁盘伤害大)。  </p>
-<p>###shredcycles COUNT<br>    调用shred在删除日志文件前覆写COUNT次，不使用此项时，就按shred默认次数覆写。  </p>
-<p>###noshred<br>    删除就文件时不使用shred  </p>
-<p>###missingok<br>    如果日志文件不存在，继续处理下一个文件而不产生报错信息。  </p>
-<p>###nomissingok<br>    默认项，如果日志文件不存在，就产生错误。    </p>
-<p>###olddir DIRECTORY<br>    轮转的日志放到DIRECTORY目录中，目录必须与日志文件在同一物理设备上，<br>    如果没指定绝对路径，则假定该目录在与日志目录下。  </p>
-<p>###noolddir<br>    日志只在它们的当前目录中轮转。   </p>
-<p>###sharedsctipts<br>    通常prerotate和postrotate脚本为每一个轮转的日志运行，也就是说一个单独的脚本可能因为日志轮转定义<br>    中匹配了多个文件时(例如/var/log/news/*)，该脚本会运行多次。<br>    指定此项，脚本只对所有匹配的日志文件统一执行一次。<br>    如果匹配的日志都不需要轮转，脚本也不会执行。<br>    如果脚本错误退出，剩下的动作也不会为任何日志执行。<br>    隐含create项，可被nosharedscripts覆盖。  </p>
-<p>###nosharedscripts<br>    默认项<br>    为每一个轮转的日志执行prerotate和postrotate<br>    如果脚本错误退出，剩下的动作只不对影响到的日志执行。  </p>
-<p>###prerotate/endscript<br>    在prerotate和endscript之间的行(他俩自己各占一行)，在日志文件被轮转之前并且有需要轮转时，才会执行。<br>    该指令只能用于log文件定义中。  </p>
-<p>###postrotate/endscript<br>    在prerotate和endscript之间的行，在日志文件被轮转之后执行。<br>    该指令只能用于log文件定义中。  </p>
-<p>###firstaction/endscript<br>    在firstaction和endscript之间的行，在轮转所有匹配了通配符的日志被轮转之前，<br>    在prerotate执行之前，并且至少要有一个日志需要被轮转时，才会执行。<br>    只能用于log文件定义中，如果脚本错误退出，就不再继续往下进行。  </p>
-<p>###lastaction/endscript<br>    在lastaction和endscript之间的行，在轮转了所有匹配的日志后，在postrotate执行之后，<br>    并且至少要有一个日志被轮转了的情况下，才会执行。<br>    只能用于log文件定义中，如果脚本错误退出，只显示一个错误信息作为最后的动作。  </p>
-<h2 id="include">include</h2><p>怎么样定义自己的滚动日志任务呢？ </p>
+</code></pre><h2 id="常用命令">常用命令</h2><h3 id="rotate_COUNT">rotate COUNT</h3><pre><code>轮转<span class="built_in">COUNT</span>次，也就是最多保留<span class="built_in">COUNT</span>个轮转备份。
+超出的被删除或邮寄。
+设置为<span class="number">0</span>，则不保存轮转的老日志。  
+</code></pre><h3 id="start_COUNT">start COUNT</h3><pre><code>轮转文件名基于这个数字。
+例如，指定<span class="number">0</span>时，原日志文件轮转的备份文件以<span class="number">.0</span>为扩展名，如果指定<span class="number">9</span>，就直接从<span class="number">.9</span>开始跳过<span class="number">0</span>-<span class="number">8</span>
+然后再继续向后轮转rotate指定的次数。  
+</code></pre><h3 id="compress">compress</h3><pre><code>默认使用gzip压缩老日志  
+</code></pre><h3 id="nocompress">nocompress</h3><pre><code>不压缩老日志  
+</code></pre><h3 id="compresscmd">compresscmd</h3><pre><code>指定压缩命令，默认gzip  
+</code></pre><h3 id="uncompresscmd">uncompresscmd</h3><pre><code>指定解压命令，默认gunzip  
+</code></pre><h3 id="compressext">compressext</h3><pre><code>如果启用了压缩，指定在压缩了的日志文件上使用哪个扩展。默认随配置的压缩命令  
+</code></pre><h3 id="compressoptions">compressoptions</h3><pre><code>可以传送命令行选项给压缩程序，默认的gzip使用-<span class="number">9</span>选项(最大压缩率)  
+</code></pre><h3 id="delaycompress">delaycompress</h3><pre><code>延迟到下次轮转时压缩之前的日志文件。  
+需要与<span class="built_in">compress</span>项连用，当程序有时不能关闭写日志文件时可使用此项。  
+</code></pre><h3 id="nodelaycompress">nodelaycompress</h3><pre><code>不延迟压缩    
+</code></pre><h3 id="copy">copy</h3><pre><code>拷贝日志文件，不修改原有文件。  
+给当前日志文件做快照，或其他工具需要截断或解析文件时，可使用此项  
+使用此项时，<span class="built_in">create</span>项就没用了，因为老日志文件占着位置  
+</code></pre><h3 id="nocopy">nocopy</h3><pre><code>留下原日志文件而不复制  
+</code></pre><h3 id="copytruncate">copytruncate</h3><pre><code>在创建了拷贝后截断原日志文件到<span class="number">0</span>大小，而不是用移动就日志文件再创建新文件的方法。  
+可用于日志一些程序不关闭日志文件一直写的情况。  
+注意，在拷贝文件和截断文件时有一个非常小的时间片，所以可能会丢失日志信息。  
+使用此项时，create无效  
+</code></pre><h3 id="nocopytruncate">nocopytruncate</h3><pre><code>创建拷贝后不截断原日志文件  
+</code></pre><h3 id="create_MODE_OWNER_GROUP">create MODE OWNER GROUP</h3><pre><code>在轮转动作之后，postrotate脚本执行之前，立即使用刚轮转的日志文件名创建日志文件。  
+MODE 指定日志文件的权限(<span class="number">0660</span>之类)  
+OWNER 指定日志文件的属主  
+<span class="keyword">GROUP</span> <span class="title">指定日志文件的属组  
+可省略任何上述属性，省略的属性从原文件继承，可使用nocreate</span>项来关闭  
+</code></pre><h3 id="nocreate">nocreate</h3><pre><code>不创建新的日志文件    
+</code></pre><h3 id="daily">daily</h3><pre><code>每天轮转日志文件  
+</code></pre><h3 id="weekly">weekly</h3><pre><code>如果当前的星期几比上次轮转的星期几少，或者过了一个多星期，就会发生轮转  
+通常是在每周的第一天轮转，如果logrotate不是每天运行的，会在第一次有机会时进行轮转。  
+</code></pre><h3 id="monthly">monthly</h3><pre><code>一月中logrotate第一次运行时进行轮转<span class="comment">(通常是一月的第一天)</span>  
+</code></pre><h3 id="yearly">yearly</h3><pre><code>如果当前年份不同于上次轮转的年份，则进行日志轮转    
+</code></pre><h3 id="dateext">dateext</h3><pre><code>归档旧日志文件时，文件名添加YYYYMMDD形式日期，可用dateformat选项扩展配置。  
+</code></pre><h3 id="nodateext">nodateext</h3><pre><code>不使用dateext扩展名  
+</code></pre><h3 id="dateformat_FORMAT_STRING">dateformat FORMAT_STRING</h3><pre><code>使用strftime<span class="comment">(3)</span>类似的格式指定dateext的格式，只允许<span class="preprocessor">%</span>Y <span class="preprocessor">%</span>m <span class="preprocessor">%</span>d和<span class="preprocessor">%</span>s指定符。  
+默认为 -<span class="preprocessor">%</span>Y<span class="preprocessor">%</span>m<span class="preprocessor">%</span>d。  
+注意：扩展中分割日志的字符也是日期格式的一部分，  
+系统时钟需要设置到<span class="number">2001</span><span class="number">-09</span><span class="number">-09</span>之后，<span class="preprocessor">%</span>s才能正确工作  
+</code></pre><h3 id="extension_EXT">extension EXT</h3><pre><code>日志文件可在轮转后使用指定的<span class="tag">EXT</span>扩展名。  
+如果使用压缩，通常<span class="tag">EXT</span>后还会加上压缩文件的扩展名，通常是<span class="class">.gz</span>。  
+例如想把<span class="tag">mylog</span><span class="class">.foo</span>轮转为<span class="tag">mylog</span><span class="class">.1</span><span class="class">.foo</span><span class="class">.gz</span>而不是<span class="tag">mylog</span><span class="class">.foo</span><span class="class">.1</span><span class="class">.gz</span>    
+</code></pre><h3 id="ifempty">ifempty</h3><pre><code>默认项，即使日志是空的也进行轮转，覆盖notifempty项  
+</code></pre><h3 id="notifempty">notifempty</h3><pre><code>如果日志为空，则不进行轮转    
+</code></pre><h3 id="include_FILE_OR_DIRECTORY">include FILE_OR_DIRECTORY</h3><pre><code>读取<span class="preprocessor"><span class="keyword">include</span>指令下的文件。  
+如果是目录，在继续处理包含的文件之前，按字母顺序读取目录下大部分文件(只读取普通文件)  
+    目录或管道文件等，还有使用指定扩展名的文件不读取  
+    用tabooext指令定义禁忌扩展名。  
+<span class="keyword">include</span>指令不能出现在日志文件定义中。  </span>
+</code></pre><h3 id="tabooext_[+]_LIST">tabooext [+] LIST</h3><pre><code>修改当前禁忌扩展名列表。  
+如果列表前使用了+，表示将LIST加到当前列表中，否则就替换当前列表。  
+默认包含：<span class="class">.rpmorig</span>, <span class="class">.rpmsave</span>, <span class="class">.v</span>, <span class="class">.swp</span>, <span class="class">.dpkg-dist</span>, <span class="class">.dpkg-old</span>, <span class="class">.dpkg-new</span>, <span class="class">.disabled</span>    
+</code></pre><h3 id="mail_ADDRESS">mail ADDRESS</h3><pre><code>当日志轮转超过保留数时，多出的会mail到ADDRESS。  
+可在<span class="command">log</span>定义中使用nomail指令来不邮寄该<span class="command">log</span>  
+</code></pre><h3 id="nomail">nomail</h3><pre><code>不邮寄日志  
+</code></pre><h3 id="mailfirst">mailfirst</h3><pre><code>与mail指令连用，邮寄刚轮转的日志，而不是期满的日志<span class="comment">(超出数量要被删除的)</span>  
+</code></pre><h3 id="maillast">maillast</h3><pre><code>默认项，与mail连用，邮寄超出<span class="keyword">rotate</span>数量要被删除的日志。    
+</code></pre><h3 id="maxage_COUNT">maxage COUNT</h3><pre><code>删除<span class="built_in">COUNT</span>天前的轮转备份。  
+只在轮转动作时检查日志文件的时间戳。  
+如果配置了maillast和mail指令，删除的轮转备份会被邮寄。  
+</code></pre><h3 id="minsize_SIZE">minsize SIZE</h3><pre><code>日志文件增长到超过<span class="built_in">SIZE</span> bytes时进行轮转，但不会在额外指定的时间间隔之前(daily，weekly等)。  
+相关的<span class="built_in">size</span>指令与其类似，但<span class="built_in">size</span>与间隔指令互斥，不考虑时间而直接进行轮转。  
+而minsize指令要考虑大小和时间戳。  
+</code></pre><h3 id="size_SIZE">size SIZE</h3><pre><code>超过<span class="built_in">SIZE</span>时轮转，<span class="built_in">SIZE</span>默认单位是KB，可使用M，G来指定MB和GB。  
+</code></pre><h3 id="shred">shred</h3><pre><code>默认关闭  
+删除文件使用shred -<span class="function"><span class="title">u</span><span class="params">(销毁)</span></span>而不是<span class="function"><span class="title">unlink</span><span class="params">()</span></span>系统调用。  
+可确保删除日志后，文件不可读(对磁盘伤害大)。  
+</code></pre><h3 id="shredcycles_COUNT">shredcycles COUNT</h3><pre><code>调用shred在删除日志文件前覆写<span class="built_in">COUNT</span>次，不使用此项时，就按shred默认次数覆写。  
+</code></pre><h3 id="noshred">noshred</h3><pre><code>删除就文件时不使用shred  
+</code></pre><h3 id="missingok">missingok</h3><pre><code>如果日志文件不存在，继续处理下一个文件而不产生报错信息。  
+</code></pre><h3 id="nomissingok">nomissingok</h3><pre><code>默认项，如果日志文件不存在，就产生错误。    
+</code></pre><h3 id="olddir_DIRECTORY">olddir DIRECTORY</h3><pre><code>轮转的日志放到DIRECTORY目录中，目录必须与日志文件在同一物理设备上，  
+如果没指定绝对路径，则假定该目录在与日志目录下。  
+</code></pre><h3 id="noolddir">noolddir</h3><pre><code>日志只在它们的当前目录中轮转。   
+</code></pre><h3 id="sharedsctipts">sharedsctipts</h3><pre><code>通常prerotate和postrotate脚本为每一个轮转的日志运行，也就是说一个单独的脚本可能因为日志轮转定义  
+中匹配了多个文件时(例如/<span class="keyword">var</span>/<span class="keyword">log</span>/<span class="keyword">news</span><span class="comment">/*)，该脚本会运行多次。  
+指定此项，脚本只对所有匹配的日志文件统一执行一次。  
+如果匹配的日志都不需要轮转，脚本也不会执行。  
+如果脚本错误退出，剩下的动作也不会为任何日志执行。  
+隐含create项，可被nosharedscripts覆盖。  </span>
+</code></pre><h3 id="nosharedscripts">nosharedscripts</h3><pre><code>默认项  
+为每一个轮转的日志执行prerotate和postrotate  
+如果脚本错误退出，剩下的动作只不对影响到的日志执行。  
+</code></pre><h3 id="prerotate/endscript">prerotate/endscript</h3><pre><code>在prerotate和endscript之间的行(他俩自己各占一行)，在日志文件被轮转之前并且有需要轮转时，才会执行。  
+该指令只能用于<span class="command">log</span>文件定义中。  
+</code></pre><h3 id="postrotate/endscript">postrotate/endscript</h3><pre><code>在prerotate和endscript之间的行，在日志文件被轮转之后执行。  
+该指令只能用于<span class="command">log</span>文件定义中。  
+</code></pre><h3 id="firstaction/endscript">firstaction/endscript</h3><pre><code>在firstaction和endscript之间的行，在轮转所有匹配了通配符的日志被轮转之前，  
+在prerotate执行之前，并且至少要有一个日志需要被轮转时，才会执行。  
+只能用于<span class="command">log</span>文件定义中，如果脚本错误退出，就不再继续往下进行。  
+</code></pre><h3 id="lastaction/endscript">lastaction/endscript</h3><pre><code>在lastaction和endscript之间的行，在轮转了所有匹配的日志后，在postrotate执行之后，  
+并且至少要有一个日志被轮转了的情况下，才会执行。  
+只能用于<span class="command">log</span>文件定义中，如果脚本错误退出，只显示一个错误信息作为最后的动作。  
+</code></pre><h2 id="include">include</h2><p>怎么样定义自己的滚动日志任务呢？ </p>
 <ul>
 <li>把自己的任务放在/etc/logrotate.d下面  </li>
 <li>通过在/etc/logrotate.conf里面include自己定义的脚本  </li>
