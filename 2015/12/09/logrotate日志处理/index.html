@@ -6,21 +6,18 @@
   <title>logrotate日志处理 | superheizai的私人厨房</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
-
-在anacrontab中定义了执行cron.daily下面的所有文件(run-parts)run-parts">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="logrotate日志处理">
 <meta property="og:url" content="superheizai.github.io/2015/12/09/logrotate日志处理/index.html">
 <meta property="og:site_name" content="superheizai的私人厨房">
 <meta property="og:description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
-
-在anacrontab中定义了执行cron.daily下面的所有文件(run-parts)run-parts">
-<meta property="og:updated_time" content="2015-12-10T02:04:54.000Z">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+<meta property="og:updated_time" content="2015-12-10T07:46:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="logrotate日志处理">
 <meta name="twitter:description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
-
-在anacrontab中定义了执行cron.daily下面的所有文件(run-parts)run-parts">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit">
   
     <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
   
@@ -93,6 +90,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="概要">概要</h2><p>logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。<br>logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。</p>
+<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit lacus ut purus iaculis feugiat. Sed nec tempor elit, quis aliquam neque. Curabitur sed diam eget dolor fermentum semper at eu lorem.</p>
+</blockquote>
 <blockquote>
 <p>在anacrontab中定义了执行cron.daily下面的所有文件(run-parts)<br>run-parts /etc/cron.daily<br>在/etc/cron.daily文件夹下面，有logrotate文件</p>
 </blockquote>
@@ -220,7 +219,7 @@ OWNER 指定日志文件的属主
 <li>通过在/etc/logrotate.conf里面include自己定义的脚本  </li>
 </ul>
 <p>其实两种方式本质上是一致的。第一种是直接在logrotate.conf里inculde的文件夹下面增加文件，另外一种是在logrotate.conf里面直接include相应的文件。<br>被include的文件会继承logrotate.conf里面的配置属性，但是自身有相应的配置的话，自身的配置会覆盖继承自logrotate.conf里面的属性.</p>
-<h2 id="执行文件">执行文件</h2><p>logrotate的目标可以是具体文件，目录或者目录下面的某些文件  </p>
+<h2 id="执行文件">执行文件</h2><p>logrotate的目标可以是具体文件，目录或者目录下面的某些文件    </p>
 <ul>
 <li><p>具体文件，可以通过指定某些绝对路径名来达到，如果路径名里面有空格，需要用双引号包含，比如</p>
 <blockquote>
