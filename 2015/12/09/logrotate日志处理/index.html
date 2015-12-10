@@ -15,7 +15,7 @@
 <meta property="og:description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
 
 在anacrontab中定义了执行cron.daily下面的所有文件(run-parts)run-parts">
-<meta property="og:updated_time" content="2015-12-10T01:56:46.000Z">
+<meta property="og:updated_time" content="2015-12-10T02:04:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="logrotate日志处理">
 <meta name="twitter:description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
@@ -98,7 +98,7 @@
 </blockquote>
 <pre><code><span class="shebang">#!/bin/sh
 </span>
-/usr/sbin/logrotate /etc/logrotate.conf &gt;/dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span>
+/usr/sbin/logrotate /etc/logrotate.conf  &gt;/dev/null <span class="number">2</span> &gt;&amp;<span class="number">1</span>
 EXITVALUE=$?
 <span class="keyword">if</span> [ <span class="variable">$EXITVALUE</span> != <span class="number">0</span> ]; <span class="keyword">then</span>
 /usr/bin/logger -t logrotate <span class="string">"ALERT exited abnormally with         [<span class="variable">$EXITVALUE</span>]"</span>
@@ -109,9 +109,9 @@ EXITVALUE=$?
 <pre><code>-<span class="ruby">d  debug模式，隐含-v，不会对日志文件做实际操作
 </span>-<span class="ruby">f, --force
 </span>    强制轮转日志
--<span class="ruby">m, --mail &lt;command&gt;
+-<span class="ruby">m, --mail &lt;command &gt;
 </span>    邮寄日志时使用的命令
--<span class="ruby">s, --state &lt;statefile&gt;
+-<span class="ruby">s, --state &lt;statefile &gt;
 </span>    指定另一个state文件
 -<span class="ruby">-usage
 </span>    打印帮助
@@ -222,26 +222,25 @@ OWNER 指定日志文件的属主
 <p>其实两种方式本质上是一致的。第一种是直接在logrotate.conf里inculde的文件夹下面增加文件，另外一种是在logrotate.conf里面直接include相应的文件。<br>被include的文件会继承logrotate.conf里面的配置属性，但是自身有相应的配置的话，自身的配置会覆盖继承自logrotate.conf里面的属性.</p>
 <h2 id="执行文件">执行文件</h2><p>logrotate的目标可以是具体文件，目录或者目录下面的某些文件  </p>
 <ul>
-<li>具体文件，可以通过指定某些绝对路径名来达到，如果路径名里面有空格，需要用双引号包含，比如</li>
-</ul>
+<li><p>具体文件，可以通过指定某些绝对路径名来达到，如果路径名里面有空格，需要用双引号包含，比如</p>
 <blockquote>
 <p>/var/log/puppet/accesslog {<br>XXX<br>}</p>
 </blockquote>
-<ul>
-<li>目录，在某个文件路径下面使用*通配符</li>
-</ul>
+</li>
+<li><p>目录，在某个文件路径下面使用*通配符</p>
 <blockquote>
 <p>/var/log/puppet/* {<br>XXX<br>}</p>
 </blockquote>
-<ul>
-<li>某些文件，比如log结尾的文件  </li>
-</ul>
+</li>
+<li><p>某些文件，比如log结尾的文件  </p>
 <blockquote>
 <p>/var/log/puppet/*log {<br>XXX<br>} </p>
 </blockquote>
+</li>
+</ul>
 <h2 id="系统信号">系统信号</h2><p>在查看系统自己的例子时候，会发现有一些用法，而且一般都是在postrotate里面</p>
 <blockquote>
-<p>/usr/bin/killall -HUP glusterfs &gt; /dev/null 2&gt;&amp;1 || true<br>pkill -USR2 -u puppet -f ‘puppet master’ || true  </p>
+<p>/usr/bin/killall -HUP glusterfs  &gt; /dev/null 2 &gt;&amp;1 || true<br>pkill -USR2 -u puppet -f ‘puppet master’ || true  </p>
 </blockquote>
 <p>这里会通过kill，killall或者pkill发送HUP，USR2信号给到进程，这些信号用在日志回滚脚本俩面，是用来使得进程重新打开日志文件的。<br>但是对于不同的进程，用到的信号量不一样，具体情况具体分析了  </p>
 <blockquote>

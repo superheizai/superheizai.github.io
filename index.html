@@ -93,7 +93,7 @@
 </blockquote>
 <pre><code><span class="shebang">#!/bin/sh
 </span>
-/usr/sbin/logrotate /etc/logrotate.conf &gt;/dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span>
+/usr/sbin/logrotate /etc/logrotate.conf  &gt;/dev/null <span class="number">2</span> &gt;&amp;<span class="number">1</span>
 EXITVALUE=$?
 <span class="keyword">if</span> [ <span class="variable">$EXITVALUE</span> != <span class="number">0</span> ]; <span class="keyword">then</span>
 /usr/bin/logger -t logrotate <span class="string">"ALERT exited abnormally with         [<span class="variable">$EXITVALUE</span>]"</span>
