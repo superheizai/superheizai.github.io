@@ -3,30 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Shell之定时任务 | superheizai的私人厨房</title>
+  <title>superheizai的私人厨房</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="crond服务crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  
-定时任务服务的操作：
-/sbin/service crond start           //启动服务
-/sbin/service crond stop            //关闭服务
-/sbin/service crond restart        /">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Shell之定时任务">
-<meta property="og:url" content="superheizai.github.io/2015/12/04/Shell之定时任务/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="superheizai的私人厨房">
+<meta property="og:url" content="superheizai.github.io/page/2/index.html">
 <meta property="og:site_name" content="superheizai的私人厨房">
-<meta property="og:description" content="crond服务crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  
-定时任务服务的操作：
-/sbin/service crond start           //启动服务
-/sbin/service crond stop            //关闭服务
-/sbin/service crond restart        /">
-<meta property="og:updated_time" content="2015-12-04T15:11:26.000Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shell之定时任务">
-<meta name="twitter:description" content="crond服务crond是linux下面的定时任务框架，是可以重复执行的定时任务。还有一种@，at定时任务，是一次性的定时任务。  
-定时任务服务的操作：
-/sbin/service crond start           //启动服务
-/sbin/service crond stop            //关闭服务
-/sbin/service crond restart        /">
+<meta name="twitter:title" content="superheizai的私人厨房">
+<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
   
@@ -72,7 +59,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Shell之定时任务" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-Shell之定时任务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/04/Shell之定时任务/" class="article-date">
   <time datetime="2015-12-04T08:54:45.000Z" itemprop="datePublished">2015-12-04</time>
@@ -89,8 +78,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Shell之定时任务
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/Shell之定时任务/">Shell之定时任务</a>
     </h1>
   
 
@@ -182,29 +171,231 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2015/12/04/Shell之except模拟交互脚本/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Shell之except模拟交互脚本
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/12/04/Shell之脚本初次/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Shell之脚本初次</div>
-    </a>
-  
-</nav>
+</article>
 
+
+  
+    <article id="post-Shell之脚本初次" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/04/Shell之脚本初次/" class="article-date">
+  <time datetime="2015-12-04T08:52:47.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/Shell之脚本初次/">Shell之脚本初次</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景">背景</h2><p>由于自己与服务器有很多台，可能由于需要重启服务等原因，每次都要到ssh登陆到远程机器，进行操作，这样子每次登陆都要输入命令，很麻烦。所以，我想通过脚本形式来解决ssh登陆的问题，这次脚本碰到的问题，也是由于这个产生的。  </p>
+<h2 id="大纲">大纲</h2><ol>
+<li>变量</li>
+<li>环境</li>
+<li>命令执行与输出</li>
+<li>管道与子shell</li>
+<li>疑惑点  </li>
+<li>脚本例子</li>
+</ol>
+<h3 id="变量">变量</h3><p>关于变量的操作，主要碰到两个问题，一个是expect下面，用set方式来定义，而bash下面直接用“=”来赋值。其实“=”赋值的时候，左右两边都是不能有空格的，如果值域上面有特殊字符或者空格之类的，最好用“”括起来。  </p>
+<h3 id="环境">环境</h3><ol>
+<li>环境配置<br>由于我的开发是在iterm2，安装了oh-my-zsh之后进行的开发，所以在配置的时候要小心点。现在的更新，应该在~/.zshrc上面进行修改，完成后需要source配置文件.  </li>
+<li><p>新脚本授权<br>在新脚本建立完毕后，要给它可执行权限，以便已“./filename.sh”方式来执行  </p>
+<pre><code><span class="tag">chmod</span> +<span class="tag">x</span> <span class="tag">filename</span><span class="class">.sh</span>
+</code></pre></li>
+</ol>
+<h3 id="命令执行与输出">命令执行与输出</h3><ol>
+<li><p>awk的使用<br>在使用脚本的时候，希望某些值以配置文件的形式定义在文件系统中，运行的时候从文件中读取相应的值来做判断，这些值的读取与解析就是通过awk来完成的。执行过程中，碰到了如下一些问题：  </p>
+<ul>
+<li>读取文件内容并执行</li>
+<li>分隔符的使用</li>
+<li><p>返回数组  </p>
+<p>以例子来说明这几个问题及其解决方案：    </p>
+<p>  // line是读取文件内容的当前行，此行代码即读取当前行并通过awk进行解析<br>  // -F”=”是指当前的分隔符是“=“，把每行文本以”=“为分隔符，分成$1,$2<br>  name=<code>echo &quot;$line&quot; | awk -F&quot;=&quot; &#39;{print $1,$2}&#39;</code><br>  //name返回的两个逗号分隔字符串，正好通过“数组=(逗号分隔字符串）”拼成数组<br>  name=($name)  </p>
+</li>
+</ul>
+</li>
+<li><p>不同域下面的脚本执行<br>由于我们写ssh自动登陆脚本是需要用到expect的，而expect是在bash下面的，并不在bash里面。所以，在普通的bash脚本里面，由于执行环境定义，一般只定义为/bin/bash，是不能够直接运行expect相关的命令的，所以，我们需要把脚本分成两个部分。一个部分是bash脚本部分，一个是expect脚本部分,在bash脚本里面，通过如下命令行去执行expect脚本  </p>
+<pre><code>expect sub_shell <span class="variable">$param</span>  
+</code></pre></li>
+</ol>
+<h3 id="管道与子shell">管道与子shell</h3><p> 这里先给出一份之前写的代码，之前没有这个概念：管道其实是子shell，子shell的修改，父shell其实是拿不到的,所以下面这段代码中，对server变量的修改，在这段程序结束后，就丢失了  </p>
+<pre><code>cat /Users/superheizai/shells/config | <span class="keyword">while</span> read line
+    do
+    name=`echo <span class="string">"$line"</span> | awk -F<span class="string">"="</span> <span class="string">'{print $1,$2}'</span>`
+    name=(<span class="variable">$name</span>)
+    <span class="keyword">if</span> [[ ${name[<span class="number">0</span>]} = <span class="variable">$param</span> ]];<span class="keyword">then</span>
+        server=${name[<span class="number">1</span>]}
+        break
+    fi
+    done
+</code></pre><p>  修改的点也比较简单，就是不用管道，利用”&lt;”操作符，直接从文件输出到while循环中。  </p>
+<pre><code> <span class="keyword">while</span> read line
+do
+  name=`echo <span class="string">"$line"</span> | awk -F<span class="string">"="</span> <span class="string">'{print $1,$2}'</span>`
+  name=(<span class="variable">$name</span>)
+  <span class="keyword">if</span> [[ ${name[<span class="number">0</span>]} = <span class="variable">$param</span> ]];<span class="keyword">then</span>
+     server=${name[<span class="number">1</span>]}
+     echo <span class="variable">$server</span>
+     break
+   fi
+done &lt; /Users/superheizai/shells/config
+</code></pre><h3 id="疑惑点">疑惑点</h3><p>   最主要的疑惑点是，当前bash下面和expect里面，语法使用不一样，比如变量定义，一个用set，一个用“=”；比如if语句，一个判断用if{}{}，一个用if[];then fi    </p>
+<h3 id="脚本例子">脚本例子</h3><p>   这里把自己的写的脚本和相关文件贴出来，分为bash脚本和expect脚本，bash脚本会在内部调用expect脚本  </p>
+<ul>
+<li><p>配置文件config</p>
+<pre><code>a=<span class="number">10.199</span><span class="class">.XXX</span><span class="class">.xx</span> 
+b=<span class="number">10.199</span><span class="class">.xxx</span><span class="class">.xx</span>  
+c=<span class="number">10.199</span><span class="class">.xxx</span><span class="class">.xx</span>  
+d=<span class="number">10.199</span><span class="class">.xxx</span><span class="class">.xx</span>  
+</code></pre></li>
+<li><p>login_expect.sh  </p>
+<pre><code><span class="comment">   #!/usr/bin/expect</span>
+
+<span class="keyword">set</span> user [<span class="keyword">lindex</span> <span class="variable">$argv</span> <span class="number">0</span>]
+<span class="keyword">set</span> <span class="keyword">pwd</span> [<span class="keyword">lindex</span> <span class="variable">$argv</span> <span class="number">1</span>]
+<span class="keyword">set</span> server [<span class="keyword">lindex</span> <span class="variable">$argv</span> <span class="number">2</span>]
+send_user <span class="string">"$user--$pwd--$server"</span>
+spawn ssh <span class="variable">$user</span>@<span class="variable">$server</span> -p <span class="number">22</span>
+send_user <span class="string">"start ssh\n"</span>
+expect  {
+   <span class="string">"*password:"</span> {send <span class="variable">$pwd</span>\r}
+   <span class="string">"yes/no"</span> {send <span class="string">"yes\r"</span>}
+}
+expect <span class="string">"]#"</span>
+send <span class="string">"echo ssh started-------\r"</span>
+interact  
+</code></pre></li>
+</ul>
+<ul>
+<li>login.sh  </li>
+</ul>
+<pre><code><span class="shebang">#!/bin/bash
+</span>
+user=user
+<span class="built_in">pwd</span>=<span class="built_in">pwd</span>
+server=<span class="string">"10.199.XXX.XX"</span>
+
+<span class="keyword">if</span> [[ <span class="variable">$#</span> <span class="operator">-eq</span> <span class="number">1</span> ]]; <span class="keyword">then</span>
+param=<span class="variable">$1</span>
+cat /Users/superheizai/shells/config | <span class="keyword">while</span> <span class="built_in">read</span> line
+<span class="keyword">do</span>
+      name=`<span class="built_in">echo</span> <span class="string">"<span class="variable">$line</span>"</span> | awk -F<span class="string">"="</span> <span class="string">'{print $1,$2}'</span>`
+      name=(<span class="variable">$name</span>)
+     <span class="keyword">if</span> [[ <span class="variable">${name[0]}</span> = <span class="variable">$param</span> ]];<span class="keyword">then</span>
+       server=<span class="variable">${name[1]}</span>
+       <span class="built_in">break</span>
+      <span class="keyword">fi</span>
+<span class="keyword">done</span>
+
+<span class="keyword">fi</span>
+
+<span class="keyword">if</span> [[ <span class="variable">$#</span> <span class="operator">-eq</span> <span class="number">2</span> ]];<span class="keyword">then</span>
+param=<span class="variable">$1</span>
+cat /Users/superheizai/shells/config | <span class="keyword">while</span> <span class="built_in">read</span> line
+<span class="keyword">do</span>
+      name=`<span class="built_in">echo</span> <span class="string">"<span class="variable">$line</span>"</span> | awk -F<span class="string">"="</span> <span class="string">'{print $1,$2}'</span>`
+      name=(<span class="variable">$name</span>)
+     <span class="keyword">if</span> [[ <span class="variable">${name[0]}</span> = <span class="variable">$param</span> ]];<span class="keyword">then</span>
+       server=<span class="variable">${name[1]}</span>
+       <span class="built_in">break</span>
+       <span class="keyword">fi</span>
+
+<span class="keyword">done</span>    
+
+ <span class="built_in">pwd</span>=<span class="variable">$2</span>
+<span class="keyword">fi</span>
+expect login_expect <span class="variable">$user</span>  <span class="variable">$pwd</span> <span class="variable">$server</span>
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/04/Shell之脚本初次/" data-id="cii03kkge000xua4hyrgom9gz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/脚本/">脚本</a></li></ul>
+
+    </footer>
+  </div>
   
 </article>
 
+
+  
+    <article id="post-Git-多Repo配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/04/Git-多Repo配置/" class="article-date">
+  <time datetime="2015-12-04T05:08:24.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/Git-多Repo配置/">Git 多Repo配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：</p>
+<h2 id="生成ssh_key">生成ssh key</h2><pre><code>ssh-keygen -t rsa -C <span class="string">"superheizai"</span> <span class="operator">-f</span> ~/.ssh/github
+
+-C ：指的是目标GIT repo的用户名
+<span class="operator">-f</span> ：指的是生成密钥的本地地址
+</code></pre><p>   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对应的GIT repo配置</p>
+<h2 id="定义config">定义config</h2><p>  在.ssh下面生成一个config文件，里面配置如下信息：    </p>
+<pre><code>host github<span class="class">.com</span> <span class="id">#GIT</span> REPO域名，比如git@github.com中的github<span class="class">.com</span>
+ user git  #用户，一般都是这个,比如git@github.com中的git
+ hostname github<span class="class">.com</span>  #可选，指向域名，比如git@github.com中的github<span class="class">.com</span>
+ port <span class="number">22</span>  #端口，一般不变
+ identityfile ~/.ssh/github <span class="id">#ssh</span> key生成的时候，文件路径
+</code></pre><h2 id="测试连通性">测试连通性</h2><p> ssh -T host # host是config里面定义的host</p>
+<p> 如果提示连通，说明生效了  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="cii03kkf00000ua4hiv1yv0x2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多repo/">多repo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 </section>
         
           <aside id="sidebar">
