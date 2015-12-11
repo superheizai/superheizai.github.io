@@ -88,8 +88,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这两天想给这个在线笔记增加一个回到顶部的功能，在网上搜索了下，找到了两种基本的解决方案。典型例子的链接，在下面的参考资料中会给出. 我用第二个。</p>
-<p>我这里要说的是给这个div加上<strong><code>z-index:9999999</code></strong>属性。  </p>
+        <p>这两天想给这个在线笔记增加一个回到顶部的功能.</p>
+<h2 id="解决问题">解决问题</h2><p>在网上搜索了下，找到了两种基本的解决方案。典型例子的链接，在下面的参考资料中会给出. 我用第二个。为啥用第二个，是因为好看，方便还是啥原因？因为第一个不生效，然后用第二个还没生效，就在第二个上面解决问题，也就用了第二个。不过，第二个确实比第一个好看，还有个动态页面比例。<br>我这里要说的是，解决回到顶部按钮失效的问题。怎么破？给这个div加上<strong><code>z-index:9999999</code></strong>属性！</p>
 <pre><code><span class="tag">&lt;<span class="title">style</span> <span class="attribute">id</span>=<span class="value">'inline-css'</span> <span class="attribute">type</span>=<span class="value">'text/css'</span>&gt;</span><span class="css">  
 <span class="id">#backtoTop</span><span class="rules">{
 <span class="rule"><span class="attribute">background-color</span>:<span class="value"><span class="hexcolor">#eee</span></span></span>;
@@ -120,13 +120,16 @@
 <span class="class">.per</span><span class="pseudo">:hover</span><span class="pseudo">:before</span><span class="rules">{
 <span class="rule"><span class="attribute">content</span>:<span class="value"><span class="string">"↑"</span></span></span>;<span class="rule"><span class="attribute">font-size</span>:<span class="value"><span class="number">20px</span></span></span></span>}  
 </span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>  
-</code></pre><p>尝试了两种方案，都没有起作用。都是看到了这个回到顶部的按钮，但是点击的时候没有任何反应。调试的时候，没有看到click事件发生。搞了两天，在和一位前端同学pair的时候，该同学发现右击审查元素的时候，并没有选中该元素，而是选中了该div背后的元素。于是乎，在chrome的elements中，找到该div元素，给他的对应css加上z-index属性，前端同学建议选择一个比较大的值，这里用了9999999. 设定好之后，it works!!!  </p>
-<h2 id="参考资料">参考资料</h2><p><a href="https://wsgzao.github.io/post/hexo-scroll-to-top/#" target="_blank" rel="external">通过图片设定回到顶部</a><br><a href="http://lukang.me/2015/hexo-gotop.html" target="_blank" rel="external">通过div设定回到顶部</a></p>
-
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/11/回到顶部按钮/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/11/回到顶部按钮/" data-id="cii1jz2uz0009vj4hkk50he8u" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/11/回到顶部按钮/" data-id="cii1lpmp900098e4h7r06jvm5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回到顶部/">回到顶部</a></li></ul>
@@ -174,12 +177,19 @@
 <blockquote>
 <p> article .entry blockquote {<br>  background: #f6f6f6;<br>  border-left: 4px solid #999;<br>  font-style: normal;<br>  font-family: Georgia, ‘Times New Roman’, Times, STFangsong, KaiTi, serif;<br>  font-size: 1.2em;<br>  padding: 0 30px 15px;<br>  padding-top: 10px;<br>  padding-bottom: 30px;<br> }  </p>
 </blockquote>
-<p>这里的样式才是我想要，我只能把这段代码复制到style.css里面，并改成一致的名字。最后变成了这样：<br><img src="http://7xoxy0.com1.z0.glb.clouddn.com/css-normal.png" alt=""></p>
+<p>这里的样式才是我想要，我只能把这段代码复制到style.css里面，并改成一致的名字。最后变成了这样：</p>
+<p><img src="http://7xoxy0.com1.z0.glb.clouddn.com/css-normal.png" alt=""></p>
+<hr>
+<p>PS：这个解决方案并不彻底，只是解决了表面现象。<br>需要在themes/landscape/source/css/_partial/article.styl中，找到.article-entry中的blockquote节点,把里面的内容替换为上面的内容，注意两点： </p>
+<ul>
+<li>style文件中，每行不需要“；”结尾  </li>
+<li>空格缩进要注意，否则运行时候会报错</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/10/hexo用landscape时，引用类型不起作用/" data-id="cii1jz2v8000tvj4h9azd564o" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/10/hexo用landscape时，引用类型不起作用/" data-id="cii1lpmpj000t8e4hawxeqkkc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/引用类型/">引用类型</a></li></ul>
@@ -239,7 +249,7 @@ EXITVALUE=$?
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/09/logrotate日志处理/" data-id="cii1jz2v5000mvj4hw0wsr9ji" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/09/logrotate日志处理/" data-id="cii1lpmpg000m8e4hr5mj9ntz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logrotate/">logrotate</a></li></ul>
@@ -295,7 +305,7 @@ EXITVALUE=$?
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/06/cut命令使用/" data-id="cii1jz2va000zvj4hraqozeu2" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/06/cut命令使用/" data-id="cii1lpmpl000z8e4h66wx8yt6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cut/">cut</a></li></ul>
@@ -345,7 +355,7 @@ EXITVALUE=$?
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/利用GitHub搭建个人博客/" data-id="cii1jz2v1000hvj4hwzrd2vpi" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/利用GitHub搭建个人博客/" data-id="cii1lpmpc000h8e4hx89vgiln" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
