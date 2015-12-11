@@ -3,33 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Git 多Repo配置 | superheizai的私人厨房</title>
+  <title>回到顶部按钮 | superheizai的私人厨房</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：
-生成ssh keyssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
-
--C ：指的是目标GIT repo的用户名
--f ：指的是生成密钥的本地地址
-   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对">
+  <meta name="description" content="这两天想给这个在线笔记增加一个回到顶部的功能，在网上搜索了下，找到了两种基本的解决方案。典型例子的链接，在下面的参考资料中会给出. 我用第二个。
+我这里要说的是给这个div加上z-index:9999999属性。  
+&amp;lt;style id=&apos;inline-css&apos; type=&apos;text/css&apos;&amp;gt;  
+#backtoTop{
+background-color:#eee;
+border-r">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git 多Repo配置">
-<meta property="og:url" content="superheizai.github.io/2015/12/04/Git-多Repo配置/index.html">
+<meta property="og:title" content="回到顶部按钮">
+<meta property="og:url" content="superheizai.github.io/2015/12/11/回到顶部按钮/index.html">
 <meta property="og:site_name" content="superheizai的私人厨房">
-<meta property="og:description" content="在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：
-生成ssh keyssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
-
--C ：指的是目标GIT repo的用户名
--f ：指的是生成密钥的本地地址
-   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对">
-<meta property="og:updated_time" content="2015-12-04T15:12:10.000Z">
+<meta property="og:description" content="这两天想给这个在线笔记增加一个回到顶部的功能，在网上搜索了下，找到了两种基本的解决方案。典型例子的链接，在下面的参考资料中会给出. 我用第二个。
+我这里要说的是给这个div加上z-index:9999999属性。  
+&amp;lt;style id=&apos;inline-css&apos; type=&apos;text/css&apos;&amp;gt;  
+#backtoTop{
+background-color:#eee;
+border-r">
+<meta property="og:updated_time" content="2015-12-11T08:38:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git 多Repo配置">
-<meta name="twitter:description" content="在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：
-生成ssh keyssh-keygen -t rsa -C &quot;superheizai&quot; -f ~/.ssh/github
-
--C ：指的是目标GIT repo的用户名
--f ：指的是生成密钥的本地地址
-   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对">
+<meta name="twitter:title" content="回到顶部按钮">
+<meta name="twitter:description" content="这两天想给这个在线笔记增加一个回到顶部的功能，在网上搜索了下，找到了两种基本的解决方案。典型例子的链接，在下面的参考资料中会给出. 我用第二个。
+我这里要说的是给这个div加上z-index:9999999属性。  
+&amp;lt;style id=&apos;inline-css&apos; type=&apos;text/css&apos;&amp;gt;  
+#backtoTop{
+background-color:#eee;
+border-r">
   
     <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
   
@@ -76,14 +76,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Git-多Repo配置" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-回到顶部按钮" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/12/04/Git-多Repo配置/" class="article-date">
-  <time datetime="2015-12-04T05:08:24.000Z" itemprop="datePublished">2015-12-04</time>
+    <a href="/2015/12/11/回到顶部按钮/" class="article-date">
+  <time datetime="2015-12-11T08:09:10.000Z" itemprop="datePublished">2015-12-11</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/git/">git</a>
+    <a class="article-category-link" href="/categories/git/">git</a>►<a class="article-category-link" href="/categories/git/hexo/">hexo</a>
   </div>
 
   </div>
@@ -94,7 +94,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Git 多Repo配置
+      回到顶部按钮
     </h1>
   
 
@@ -102,28 +102,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：</p>
-<h2 id="生成ssh_key">生成ssh key</h2><pre><code>ssh-keygen -t rsa -C <span class="string">"superheizai"</span> <span class="operator">-f</span> ~/.ssh/github
+        <p>这两天想给这个在线笔记增加一个回到顶部的功能，在网上搜索了下，找到了两种基本的解决方案。典型例子的链接，在下面的参考资料中会给出. 我用第二个。</p>
+<p>我这里要说的是给这个div加上<strong><code>z-index:9999999</code></strong>属性。  </p>
+<pre><code><span class="tag">&lt;<span class="title">style</span> <span class="attribute">id</span>=<span class="value">'inline-css'</span> <span class="attribute">type</span>=<span class="value">'text/css'</span>&gt;</span><span class="css">  
+<span class="id">#backtoTop</span><span class="rules">{
+<span class="rule"><span class="attribute">background-color</span>:<span class="value"><span class="hexcolor">#eee</span></span></span>;
+<span class="rule"><span class="attribute">border-radius</span>:<span class="value"><span class="number">100%</span></span></span>;
+<span class="rule"><span class="attribute">bottom</span>:<span class="value"><span class="number">10%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">48px</span></span></span>;
+<span class="rule"><span class="attribute">position</span>:<span class="value">fixed</span></span>;
+<span class="rule"><span class="attribute">right</span>:<span class="value">-<span class="number">100px</span></span></span>;
+<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">48px</span></span></span>;
+<span class="rule"><span class="attribute">transition</span>:<span class="value"><span class="number">0.5s</span></span></span>;
+<span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"><span class="number">0.5s</span></span></span>;
+<span class="rule"><span class="attribute">z-index</span>:<span class="value"> <span class="number">9999999</span></span></span></span>}  
 
--C ：指的是目标GIT repo的用户名
-<span class="operator">-f</span> ：指的是生成密钥的本地地址
-</code></pre><p>   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对应的GIT repo配置</p>
-<h2 id="定义config">定义config</h2><p>  在.ssh下面生成一个config文件，里面配置如下信息：    </p>
-<pre><code>host github<span class="class">.com</span> <span class="id">#GIT</span> REPO域名，比如git@github.com中的github<span class="class">.com</span>
- user git  #用户，一般都是这个,比如git@github.com中的git
- hostname github<span class="class">.com</span>  #可选，指向域名，比如git@github.com中的github<span class="class">.com</span>
- port <span class="number">22</span>  #端口，一般不变
- identityfile ~/.ssh/github <span class="id">#ssh</span> key生成的时候，文件路径
-</code></pre><h2 id="测试连通性">测试连通性</h2><p> ssh -T host # host是config里面定义的host</p>
-<p> 如果提示连通，说明生效了  </p>
+<span class="id">#backtoTop</span><span class="class">.button--show</span><span class="rules">{
+<span class="rule"><span class="attribute">right</span>:<span class="value"><span class="number">10px</span></span></span></span>}  
+
+<span class="class">.per</span><span class="rules">{
+<span class="rule"><span class="attribute">font-size</span>:<span class="value"><span class="number">16px</span></span></span>;
+<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">48px</span></span></span>;
+<span class="rule"><span class="attribute">line-height</span>:<span class="value"><span class="number">48px</span></span></span>;
+<span class="rule"><span class="attribute">position</span>:<span class="value">absolute</span></span>;
+<span class="rule"><span class="attribute">text-align</span>:<span class="value">center</span></span>;
+<span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">0</span></span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">48px</span></span></span>;
+<span class="rule"><span class="attribute">color</span>:<span class="value"><span class="hexcolor">#555</span></span></span>;<span class="rule"><span class="attribute">cursor</span>:<span class="value">pointer</span></span></span>}
+
+<span class="class">.per</span><span class="pseudo">:before</span><span class="rules">{
+<span class="rule"><span class="attribute">content</span>:<span class="value"><span class="function">attr</span>(data-percent)</span></span></span>}  
+
+<span class="class">.per</span><span class="pseudo">:hover</span><span class="pseudo">:before</span><span class="rules">{
+<span class="rule"><span class="attribute">content</span>:<span class="value"><span class="string">"↑"</span></span></span>;<span class="rule"><span class="attribute">font-size</span>:<span class="value"><span class="number">20px</span></span></span></span>}  
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>  
+</code></pre><p>尝试了两种方案，都没有起作用。都是看到了这个回到顶部的按钮，但是点击的时候没有任何反应。调试的时候，没有看到click事件发生。搞了两天，在和一位前端同学pair的时候，该同学发现右击审查元素的时候，并没有选中该元素，而是选中了该div背后的元素。于是乎，在chrome的elements中，找到该div元素，给他的对应css加上z-index属性，前端同学建议选择一个比较大的值，这里用了9999999. 设定好之后，it works!!!  </p>
+<h2 id="参考资料">参考资料</h2><p><a href="https://wsgzao.github.io/post/hexo-scroll-to-top/#" target="_blank" rel="external">通过图片设定回到顶部</a><br><a href="http://lukang.me/2015/hexo-gotop.html" target="_blank" rel="external">通过div设定回到顶部</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="cii1jz2ui0000vj4hu0r41wa0" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/11/回到顶部按钮/" data-id="cii1jz2uz0009vj4hkk50he8u" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多repo/">多repo</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回到顶部/">回到顶部</a></li></ul>
 
     </footer>
   </div>
@@ -131,15 +151,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/12/04/Shell之脚本初次/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Shell之脚本初次
-        
-      </div>
-    </a>
   
+    <a href="/2015/12/10/hexo用landscape时，引用类型不起作用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexo用landscape时，引用类型不起作用</div>
+    </a>
   
 </nav>
 

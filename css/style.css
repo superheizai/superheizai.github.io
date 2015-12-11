@@ -9,6 +9,43 @@ body:after {
 body:after {
   clear: both;
 }
+#backtoTop {
+  background-color: #eee;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  bottom: 10%;
+  height: 48px;
+  position: fixed;
+  right: -100px;
+  width: 48px;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  z-index: 9999999;
+}
+#backtoTop.button--show {
+  right: 10px;
+}
+.per {
+  font-size: 16px;
+  height: 48px;
+  line-height: 48px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 48px;
+  color: #555;
+  cursor: pointer;
+}
+.per:before {
+  content: attr(data-percent);
+}
+.per:hover:before {
+  content: "↑";
+  font-size: 20px;
+}
 html,
 body,
 div,
@@ -625,14 +662,10 @@ a.article-title:hover {
   padding: 10px 0;
 }
 .article-entry blockquote {
-  background: #f6f6f6;
-  border-left: 4px solid #999;
-  font-style: normal;
-  font-family: Georgia, 'Times New Roman', Times, STFangsong, KaiTi, serif;
-  font-size: 1.2em;
-  padding: 0 30px 15px;
-  padding-top: 10px;
-  padding-bottom: 30px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.4em;
+  margin: 1.6em 20px;
+  text-align: center;
 }
 .article-entry blockquote footer {
   font-size: 14px;

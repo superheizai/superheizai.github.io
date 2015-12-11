@@ -24,13 +24,6 @@
   <link rel="stylesheet" href="/css/style.css" type="text/css">
   
 
-  <style id='inline-css' type='text/css'>
-#backtoTop{background-color:#eee;border-radius:100%;bottom:10%;height:48px;position:fixed;right:-100px;width:48px;transition:0.5s;-webkit-transition:0.5s}
-#backtoTop.button--show{right:10px}
-.per{font-size:16px;height:48px;line-height:48px;position:absolute;text-align:center;top:0;width:48px;color:#555;cursor:pointer}
-.per:before{content:attr(data-percent)}
-.per:hover:before{content:"↑";font-size:20px}
-</style>
 </head>
 
 <body>
@@ -68,6 +61,95 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Shell之except模拟交互脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/04/Shell之except模拟交互脚本/" class="article-date">
+  <time datetime="2015-12-04T08:55:15.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/Shell之except模拟交互脚本/">Shell之except模拟交互脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景">背景</h2><p> 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  </p>
+<h2 id="代码及其分析">代码及其分析</h2><p> 先来一份代码示例<br>      //1</p>
+<pre><code> <span class="comment">#!/usr/bin/expect </span>
+
+  <span class="comment"> //2</span>
+<span class="built_in">set</span> user user 
+<span class="built_in">set</span> pwd pwd
+<span class="built_in">set</span> server <span class="number">10.199</span>.XXX.XX
+
+<span class="comment">
+//3</span>
+spawn ssh $user@$server -p <span class="number">22</span><span class="comment">
+//9 </span>
+send_user <span class="string">"start ssh\n"</span><span class="comment">
+//4</span>
+expect  {
+   <span class="string">"*password:"</span> {<span class="built_in">send</span> $pwd\r}
+   <span class="string">"yes/no"</span> {<span class="built_in">send</span> <span class="string">"yes\r"</span>}
+}
+expect <span class="string">"]#"</span><span class="comment">
+//10</span>
+log_file log_result<span class="comment">
+//5</span>
+<span class="built_in">send</span> <span class="string">"ps -ef\r"</span><span class="comment">
+//6  </span>
+<span class="built_in">send</span> <span class="string">"ret=`echo $?`\r"</span>
+<span class="built_in">send</span> <span class="string">"exit \$ret\r"</span><span class="comment">
+//7</span>
+<span class="comment">#interact</span><span class="comment">
+//8</span>
+<span class="comment">#expect eof</span>
+</code></pre><p>这里简单介绍下我的这段代码：  </p>
+<ol>
+<li>定义此脚本是通过/usr/bin/expect来执行。如果没有这行直接执行，会告诉你spawn，send等命令找不到  </li>
+<li>此处的代码是设置shell里面的变量  </li>
+<li>spawn命令会启动一个进程，用来给ssh运行进程加个壳，传递交互指令。再强调一次，spawn是进入expect之后才可以看到的指令，用which spawn是看不到spawn命令的  </li>
+<li>expect可以有一个或者多个返回，多个返回的时候可以用{}括起来对不同情况的处理，一个返回的时候，直接就省略掉{}.expect多个返回时候，”{“必须和expect同一行    </li>
+<li>发送执行命令指令  </li>
+<li>这里是希望看到执行结果，所以我用了$?这个上次执行结果输出到变量  </li>
+<li>这个指令是指继续留在SSH登陆状态,这里以内执行了exit，直接退出了,interact不起作用  </li>
+<li>执行结束标示，在spawn进程结束后会给expect发送eof  </li>
+<li>给用户提示信息，只作纯文本的提示，像echo一样  </li>
+<li><p>log_file filename会把日志打到filename文本里面，默认是append，所以会有文件大小问题</p>
+<p>一些参考资料<br><a href="http://blog.chinaunix.net/uid-15007890-id-273604.html" target="_blank" rel="external"> expect学习笔记及实例详解 </a><br><a href="http://zhidao.baidu.com/link?url=NTNequSIXB5Hq38HGD1lxCTIXxaC8kKZQUZdNj-EGhu6JZmWMLFyOQmiPdZ4DW-lp0p_rJjzF8MU5tBkVwuaPq" target="_blank" rel="external">通过wait获取返回值</a><br><a href="http://stackoverflow.com/questions/23614039/how-to-get-the-exit-code-of-spawned-process-in-expect-shell-script" target="_blank" rel="external">expect-return-code</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/" data-id="cii1jz2vi001evj4hpool3agt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/expect/">expect</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-Shell之定时任务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -171,7 +253,7 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之定时任务/" data-id="cii03kkgh0012ua4hwh0azqt1" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之定时任务/" data-id="cii1jz2vf0018vj4hhw0u6syc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cron/">cron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/定时任务/">定时任务</a></li></ul>
@@ -332,7 +414,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之脚本初次/" data-id="cii03kkge000xua4hyrgom9gz" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之脚本初次/" data-id="cii1jz2vd0013vj4hrqr2ghq8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/脚本/">脚本</a></li></ul>
@@ -389,7 +471,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="cii03kkf00000ua4hiv1yv0x2" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="cii1jz2ui0000vj4hu0r41wa0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多repo/">多repo</a></li></ul>
@@ -415,7 +497,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -424,7 +506,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -433,7 +515,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
     </div>
   </div>
 
@@ -442,7 +524,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">8</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">9</span></li></ul>
     </div>
   </div>
 
@@ -452,6 +534,10 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/11/回到顶部按钮/">回到顶部按钮</a>
+          </li>
         
           <li>
             <a href="/2015/12/10/hexo用landscape时，引用类型不起作用/">hexo用landscape时，引用类型不起作用</a>
@@ -467,10 +553,6 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
         
           <li>
             <a href="/2015/12/04/利用GitHub搭建个人博客/">利用GitHub搭建个人博客</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/04/Shell之except模拟交互脚本/">Shell之except模拟交互脚本</a>
           </li>
         
       </ul>
@@ -524,80 +606,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
 
 
 <script src="/js/script.js" type="text/javascript"></script>
-
-<script>
-var bigfa_scroll = {
-    drawCircle: function(id, percentage, color) {
-        var width = jQuery(id).width();
-        var height = jQuery(id).height();
-        var radius = parseInt(width / 2.20);
-        var position = width;
-        var positionBy2 = position / 2;
-        var bg = jQuery(id)[0];
-        id = id.split("#");
-        var ctx = bg.getContext("2d");
-        var imd = null;
-        var circ = Math.PI * 2;
-        var quart = Math.PI / 2;
-        ctx.clearRect(0, 0, width, height);
-        ctx.beginPath();
-        ctx.strokeStyle = color;
-        ctx.lineCap = "square";
-        ctx.closePath();
-        ctx.fill();
-        ctx.lineWidth = 3;
-        imd = ctx.getImageData(0, 0, position, position);
-        var draw = function(current, ctxPass) {
-            ctxPass.putImageData(imd, 0, 0);
-            ctxPass.beginPath();
-            ctxPass.arc(positionBy2, positionBy2, radius, -(quart), ((circ) * current) - quart, false);
-            ctxPass.stroke();
-        }
-        draw(percentage / 100, ctx);
-    },
-    backToTop: function($this) {
-        $this.click(function() {
-            jQuery("body,html").animate({
-                scrollTop: 0
-            },
-            800);
-            return false;
-        });
-    },
-    scrollHook: function($this, color) {
-        color = color ? color: "#000000";
-        $this.scroll(function() {
-            var docHeight = (jQuery(document).height() - jQuery(window).height()),
-            $windowObj = $this,
-            $per = jQuery(".per"),
-            percentage = 0;
-            defaultScroll = $windowObj.scrollTop();
-            percentage = parseInt((defaultScroll / docHeight) * 100);
-            var backToTop = jQuery("#backtoTop");
-            if (backToTop.length > 0) {
-                if ($windowObj.scrollTop() > 200) {
-                    backToTop.addClass("button--show");
-                } else {
-                    backToTop.removeClass("button--show");
-                }
-                $per.attr("data-percent", percentage);
-                bigfa_scroll.drawCircle("#backtoTopCanvas", percentage, color);
-            }
-
-        });
-    }
-}
-
-jQuery(document).ready(function() {
-    jQuery("body").append('<div id="backtoTop" data-action="gototop"><canvas id="backtoTopCanvas" width="48" height="48"></canvas><div class="per"></div></div>');
-    var T = bigfa_scroll;
-    T.backToTop(jQuery("#backtoTop"));
-    T.scrollHook(jQuery(window), "#cc0000");
-});
-</script>
-
-
-
+<script src="/js/totop.js" type="text/javascript"></script>
 
   </div>
 </body>
