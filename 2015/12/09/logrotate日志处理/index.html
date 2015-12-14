@@ -15,7 +15,7 @@
 <meta property="og:description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
 
 在anacrontab中定义了执行cron.daily下面的所有文件(run-parts)run-parts">
-<meta property="og:updated_time" content="2015-12-10T09:30:55.000Z">
+<meta property="og:updated_time" content="2015-12-14T01:56:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="logrotate日志处理">
 <meta name="twitter:description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
@@ -239,7 +239,32 @@ OWNER 指定日志文件的属主
 </blockquote>
 </li>
 </ul>
-<h2 id="系统信号">系统信号</h2><p>在查看系统自己的例子时候，会发现有一些用法，而且一般都是在postrotate里面</p>
+<h2 id="size配置的时间周期">size配置的时间周期</h2><p>在logrotate里面，可以配置size相关的属性有两个，minisize和size（看到有介绍maxsize的，在我当前系统中没有该配置）。</p>
+<ul>
+<li>minisize是可以和时间周期一起使用的，是说如果时间周期到了，minisize这个阀值没有到的话，日志也不会回滚</li>
+<li>size不可以与时间周期一起使用</li>
+</ul>
+<p>我们知道，logrotate是根据cron定时任务的定义去执行的，系统默认为天。那我们定义了size，不根据时间周期去执行，我们需要确定我们的日志何时到达size，何时需要轮转。<br>两种方案：</p>
+<ul>
+<li>修改logrotate的执行间隔  </li>
+<li>增加自定义cron任务  </li>
+</ul>
+<p>修改logrotate的执行间隔的影响是全局性的，所有的logrotate任务全部都会以重新设置的执行间隔为基准去执行，大大影响了系统效率，这种方法对于系统层面的日志滚动效率不高。  </p>
+<p>自定义cron任务就不会有这么多问题，每秒钟去扫描一遍我们的目标日志，如果超过了我们的目标大小，则执行logrotate命令。参考下面的实现(<a href="http://blog.csdn.net/hepeng597/article/details/7768615" target="_blank" rel="external">参考自这里</a>)：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cron任务，每秒钟执行一次</span><br></pre></td></tr></table></figure>
+<pre><code><span class="shebang">#!/bin/bash  </span>
+a=<span class="string">"/tmp/test.log"</span>  
+<span class="keyword">while</span> [[ <span class="operator">-f</span> <span class="variable">$a</span> ]];  
+<span class="keyword">do</span>  
+sleep <span class="number">1</span>;  
+size=`ls -lrt <span class="variable">$a</span> | cut <span class="operator">-d</span> <span class="string">" "</span> <span class="operator">-f</span> <span class="number">5</span>`  
+<span class="built_in">echo</span> <span class="variable">$size</span>  
+<span class="keyword">if</span> [ <span class="variable">$size</span> -ge <span class="number">1024</span> ];  
+<span class="keyword">then</span>  
+logrotate  /etc/logrotate.conf;  
+<span class="keyword">fi</span>  
+<span class="keyword">done</span>  
+</code></pre><h2 id="系统信号">系统信号</h2><p>在查看系统自己的例子时候，会发现有一些用法，而且一般都是在postrotate里面</p>
 <blockquote>
 <p>/usr/bin/killall -HUP glusterfs  &gt; /dev/null 2 &gt;&amp;1 || true<br>pkill -USR2 -u puppet -f ‘puppet master’ || true  </p>
 </blockquote>
@@ -247,7 +272,7 @@ OWNER 指定日志文件的属主
 <blockquote>
 <p>TERM, INT    快速关闭<br>QUIT    从容关闭<br>HUP    重载配置，用新的配置开始新的工作进程，从容关闭旧的工作进程<br>USR1    重新打开日志文件<br>USR2    平滑升级可执行程序<br>WINCH    从容关闭工作进程  </p>
 </blockquote>
-<h2 id="参考资料">参考资料</h2><p><a href="http://huoding.com/2013/04/21/246" target="_blank" rel="external">火丁笔记</a><br><a href="http://blog.163.com/bull_linux/blog/static/2138811422013101334544349" target="_blank" rel="external">Bull酱的linux</a></p>
+<h2 id="参考资料">参考资料</h2><p><a href="http://huoding.com/2013/04/21/246" target="_blank" rel="external">火丁笔记</a><br><a href="http://blog.163.com/bull_linux/blog/static/2138811422013101334544349" target="_blank" rel="external">Bull酱的linux</a><br><a href="http://blog.csdn.net/hepeng597/article/details/7768615" target="_blank" rel="external">hepeng597</a></p>
 
       
     </div>
