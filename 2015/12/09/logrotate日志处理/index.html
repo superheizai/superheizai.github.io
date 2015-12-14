@@ -15,7 +15,7 @@
 <meta property="og:description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
 
 在anacrontab中定义了执行cron.daily下面的所有文件(run-parts)run-parts">
-<meta property="og:updated_time" content="2015-12-14T01:56:30.000Z">
+<meta property="og:updated_time" content="2015-12-14T04:06:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="logrotate日志处理">
 <meta name="twitter:description" content="概要logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。
@@ -247,11 +247,11 @@ OWNER 指定日志文件的属主
 <p>我们知道，logrotate是根据cron定时任务的定义去执行的，系统默认为天。那我们定义了size，不根据时间周期去执行，我们需要确定我们的日志何时到达size，何时需要轮转。<br>两种方案：</p>
 <ul>
 <li>修改logrotate的执行间隔  </li>
-<li>增加自定义cron任务  </li>
+<li>增加自定义后台任务  </li>
 </ul>
 <p>修改logrotate的执行间隔的影响是全局性的，所有的logrotate任务全部都会以重新设置的执行间隔为基准去执行，大大影响了系统效率，这种方法对于系统层面的日志滚动效率不高。  </p>
-<p>自定义cron任务就不会有这么多问题，每秒钟去扫描一遍我们的目标日志，如果超过了我们的目标大小，则执行logrotate命令。参考下面的实现(<a href="http://blog.csdn.net/hepeng597/article/details/7768615" target="_blank" rel="external">参考自这里</a>)：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cron任务，每秒钟执行一次</span><br></pre></td></tr></table></figure>
+<p>自定义后台任务就不会有这么多问题，每秒钟去扫描一遍我们的目标日志，如果超过了我们的目标大小，则执行logrotate命令。参考下面的实现(<a href="http://blog.csdn.net/hepeng597/article/details/7768615" target="_blank" rel="external">参考自这里</a>)：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">自定义后台任务，每秒钟执行一次，通过 <span class="string">"./customizedJob.sh &amp;"</span>来执行</span><br></pre></td></tr></table></figure>
 <pre><code><span class="shebang">#!/bin/bash  </span>
 a=<span class="string">"/tmp/test.log"</span>  
 <span class="keyword">while</span> [[ <span class="operator">-f</span> <span class="variable">$a</span> ]];  
