@@ -62,6 +62,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-linux后台任务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/14/linux后台任务/" class="article-date">
+  <time datetime="2015-12-14T10:36:26.000Z" itemprop="datePublished">2015-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/14/linux后台任务/">linux后台任务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="后台任务的相关命令">后台任务的相关命令</h2><p>&amp;, bg, jobs, fg, ctrl+z, ctrl+c<br><a href="http://www.centoscn.com/CentOS/help/2015/0311/4854.html" target="_blank" rel="external">本文转自这里</a></p>
+<h2 id="&amp;">&amp;</h2><p>加入一个命令行后面，让这个命令在后台执行  </p>
+<h2 id="ctrl+z">ctrl+z</h2><p>讲一个前台执行的命令放到后台，并置成暂停状态  </p>
+<h2 id="jobs">jobs</h2><p>查看当前的后台任务，job的状态可以使running，stopped和terminated。-l 选项可显示所有任务PID。  </p>
+<h2 id="fg_%jobnumber">fg %jobnumber</h2><p>将后台任务调至前台运行</p>
+<h2 id="bg_%jobnumber">bg %jobnumber</h2><p>让在后台暂停的任务继续运行</p>
+<h2 id="ctrl+c">ctrl+c</h2><p>终止一个前台进程。<br>对于后台进程来说，有两种方法 </p>
+<ul>
+<li>kill %jobnumber  </li>
+<li>kill pid  </li>
+</ul>
+<h2 id="nohup">nohup</h2><p>如果让程序在后台执行，即使关闭当前的终端也执行（之前的&amp;做不到），这时候需要nohup。该命令可以在你退出账户/关闭终端之后继续运行相应的进程。关闭中断后，在另外一个终端已经不能够用jobs看到后台跑的程序，可以用ps来查看.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/14/linux后台任务/" data-id="cii5ug9nq000thn4hjafg5ocl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后台任务/">后台任务</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-回到顶部按钮" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/11/回到顶部按钮/" class="article-date">
@@ -129,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/11/回到顶部按钮/" data-id="cii1mssez0009yi4hi6ga2oi8" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/11/回到顶部按钮/" data-id="cii5ug9ng0009hn4hxtd6zqs0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回到顶部/">回到顶部</a></li></ul>
@@ -189,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/10/hexo用landscape时，引用类型不起作用/" data-id="cii1mssfa000tyi4h9her5tx4" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/10/hexo用landscape时，引用类型不起作用/" data-id="cii5ug9nt0010hn4hhizcrrok" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/引用类型/">引用类型</a></li></ul>
@@ -249,7 +304,7 @@ EXITVALUE=$?
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/09/logrotate日志处理/" data-id="cii1mssf6000myi4hwoy21dep" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/09/logrotate日志处理/" data-id="cii5ug9no000mhn4h2zt312a6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logrotate/">logrotate</a></li></ul>
@@ -305,60 +360,10 @@ EXITVALUE=$?
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/06/cut命令使用/" data-id="cii1mssfd000zyi4hefyzemsu" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/06/cut命令使用/" data-id="cii5ug9nw0016hn4hx80sllhx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cut/">cut</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-利用GitHub搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/04/利用GitHub搭建个人博客/" class="article-date">
-  <time datetime="2015-12-04T14:55:27.000Z" itemprop="datePublished">2015-12-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/git/">git</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/利用GitHub搭建个人博客/">利用GitHub搭建个人博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="hexo设置">hexo设置</h1><h2 id="hexo安装与设置">hexo安装与设置</h2><ul>
-<li>nvm.sh设置，安装nvm的时候，会提示把nvm设置PATH中，并在PATH中运行nvm.sh</li>
-<li>node设置，node是npm和hexo运行的基础，所以必须先设置node的path</li>
-<li>npm设置</li>
-<li>hexo设置</li>
-</ul>
-<p>##</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/利用GitHub搭建个人博客/" data-id="cii1mssf3000hyi4hz1hd6qb3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
 
     </footer>
   </div>
@@ -381,7 +386,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -390,7 +395,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -399,7 +404,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
     </div>
   </div>
 
@@ -408,7 +413,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">9</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -418,6 +423,10 @@ EXITVALUE=$?
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/14/linux后台任务/">linux后台任务</a>
+          </li>
         
           <li>
             <a href="/2015/12/11/回到顶部按钮/">回到顶部按钮</a>
@@ -433,10 +442,6 @@ EXITVALUE=$?
         
           <li>
             <a href="/2015/12/06/cut命令使用/">cut命令使用</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/04/利用GitHub搭建个人博客/">利用GitHub搭建个人博客</a>
           </li>
         
       </ul>

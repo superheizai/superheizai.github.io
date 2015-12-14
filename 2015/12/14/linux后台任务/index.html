@@ -3,17 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: 回到顶部 | superheizai的私人厨房</title>
+  <title>linux后台任务 | superheizai的私人厨房</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="superheizai的私人厨房">
-<meta property="og:url" content="superheizai.github.io/tags/回到顶部/index.html">
+  <meta name="description" content="后台任务的相关命令&amp;amp;, bg, jobs, fg, ctrl+z, ctrl+c本文转自这里
+&amp;amp;加入一个命令行后面，让这个命令在后台执行  
+ctrl+z讲一个前台执行的命令放到后台，并置成暂停状态  
+jobs查看当前的后台任务，job的状态可以使running，stopped和terminated。-l 选项可显示所有任务PID。  
+fg %jobnumber将后台任务调至前">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux后台任务">
+<meta property="og:url" content="superheizai.github.io/2015/12/14/linux后台任务/index.html">
 <meta property="og:site_name" content="superheizai的私人厨房">
-<meta property="og:description">
+<meta property="og:description" content="后台任务的相关命令&amp;amp;, bg, jobs, fg, ctrl+z, ctrl+c本文转自这里
+&amp;amp;加入一个命令行后面，让这个命令在后台执行  
+ctrl+z讲一个前台执行的命令放到后台，并置成暂停状态  
+jobs查看当前的后台任务，job的状态可以使running，stopped和terminated。-l 选项可显示所有任务PID。  
+fg %jobnumber将后台任务调至前">
+<meta property="og:updated_time" content="2015-12-14T10:54:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="superheizai的私人厨房">
-<meta name="twitter:description">
+<meta name="twitter:title" content="linux后台任务">
+<meta name="twitter:description" content="后台任务的相关命令&amp;amp;, bg, jobs, fg, ctrl+z, ctrl+c本文转自这里
+&amp;amp;加入一个命令行后面，让这个命令在后台执行  
+ctrl+z讲一个前台执行的命令放到后台，并置成暂停状态  
+jobs查看当前的后台任务，job的状态可以使running，stopped和terminated。-l 选项可显示所有任务PID。  
+fg %jobnumber将后台任务调至前">
   
     <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
   
@@ -60,39 +73,71 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/11/回到顶部按钮/" class="archive-article-date">
-  <time datetime="2015-12-11T08:09:10.000Z" itemprop="datePublished">Dec 11</time>
+        <section id="main"><article id="post-linux后台任务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/14/linux后台任务/" class="article-date">
+  <time datetime="2015-12-14T10:36:26.000Z" itemprop="datePublished">2015-12-14</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/11/回到顶部按钮/">回到顶部按钮</a>
+    <h1 class="article-title" itemprop="name">
+      linux后台任务
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="后台任务的相关命令">后台任务的相关命令</h2><p>&amp;, bg, jobs, fg, ctrl+z, ctrl+c<br><a href="http://www.centoscn.com/CentOS/help/2015/0311/4854.html" target="_blank" rel="external">本文转自这里</a></p>
+<h2 id="&amp;">&amp;</h2><p>加入一个命令行后面，让这个命令在后台执行  </p>
+<h2 id="ctrl+z">ctrl+z</h2><p>讲一个前台执行的命令放到后台，并置成暂停状态  </p>
+<h2 id="jobs">jobs</h2><p>查看当前的后台任务，job的状态可以使running，stopped和terminated。-l 选项可显示所有任务PID。  </p>
+<h2 id="fg_%jobnumber">fg %jobnumber</h2><p>将后台任务调至前台运行</p>
+<h2 id="bg_%jobnumber">bg %jobnumber</h2><p>让在后台暂停的任务继续运行</p>
+<h2 id="ctrl+c">ctrl+c</h2><p>终止一个前台进程。<br>对于后台进程来说，有两种方法 </p>
+<ul>
+<li>kill %jobnumber  </li>
+<li>kill pid  </li>
+</ul>
+<h2 id="nohup">nohup</h2><p>如果让程序在后台执行，即使关闭当前的终端也执行（之前的&amp;做不到），这时候需要nohup。该命令可以在你退出账户/关闭终端之后继续运行相应的进程。关闭中断后，在另外一个终端已经不能够用jobs看到后台跑的程序，可以用ps来查看.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/14/linux后台任务/" data-id="cii5ug9nq000thn4hjafg5ocl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后台任务/">后台任务</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/11/回到顶部按钮/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">回到顶部按钮</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+
 </section>
         
           <aside id="sidebar">
