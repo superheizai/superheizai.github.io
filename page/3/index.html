@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015 | superheizai的私人厨房</title>
+  <title>superheizai的私人厨房</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="superheizai的私人厨房">
-<meta property="og:url" content="superheizai.github.io/archives/2015/page/2/index.html">
+<meta property="og:url" content="superheizai.github.io/page/3/index.html">
 <meta property="og:site_name" content="superheizai的私人厨房">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -62,112 +62,67 @@
       <div class="outer">
         <section id="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/06/cut命令使用/" class="archive-article-date">
-  <time datetime="2015-12-06T14:42:11.000Z" itemprop="datePublished">Dec 6</time>
+    <article id="post-Git-多Repo配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/04/Git-多Repo配置/" class="article-date">
+  <time datetime="2015-12-04T05:08:24.000Z" itemprop="datePublished">2015-12-04</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/06/cut命令使用/">cut命令使用</a>
+      <a class="article-title" href="/2015/12/04/Git-多Repo配置/">Git 多Repo配置</a>
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/04/利用GitHub搭建个人博客/" class="archive-article-date">
-  <time datetime="2015-12-04T14:55:27.000Z" itemprop="datePublished">Dec 4</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/04/利用GitHub搭建个人博客/">利用GitHub搭建个人博客</a>
-    </h1>
-  
+        <p>在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：</p>
+<h2 id="生成ssh_key">生成ssh key</h2><pre><code>ssh-keygen -t rsa -C <span class="string">"superheizai"</span> <span class="operator">-f</span> ~/.ssh/github
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/04/Shell之except模拟交互脚本/" class="archive-article-date">
-  <time datetime="2015-12-04T08:55:15.000Z" itemprop="datePublished">Dec 4</time>
-</a>
+-C ：指的是目标GIT repo的用户名
+<span class="operator">-f</span> ：指的是生成密钥的本地地址
+</code></pre><p>   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对应的GIT repo配置</p>
+<h2 id="定义config">定义config</h2><p>  在.ssh下面生成一个config文件，里面配置如下信息：    </p>
+<pre><code>host github<span class="class">.com</span> <span class="id">#GIT</span> REPO域名，比如git@github.com中的github<span class="class">.com</span>
+ user git  #用户，一般都是这个,比如git@github.com中的git
+ hostname github<span class="class">.com</span>  #可选，指向域名，比如git@github.com中的github<span class="class">.com</span>
+ port <span class="number">22</span>  #端口，一般不变
+ identityfile ~/.ssh/github <span class="id">#ssh</span> key生成的时候，文件路径
+</code></pre><h2 id="测试连通性">测试连通性</h2><p> ssh -T host # host是config里面定义的host</p>
+<p> 如果提示连通，说明生效了  </p>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/04/Shell之except模拟交互脚本/">Shell之except模拟交互脚本</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/04/Shell之定时任务/" class="archive-article-date">
-  <time datetime="2015-12-04T08:54:45.000Z" itemprop="datePublished">Dec 4</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="cii89b6890000nl4hlbxbg6gh" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/04/Shell之定时任务/">Shell之定时任务</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/04/Shell之脚本初次/" class="archive-article-date">
-  <time datetime="2015-12-04T08:52:47.000Z" itemprop="datePublished">Dec 4</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/04/Shell之脚本初次/">Shell之脚本初次</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多repo/">多repo</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
 </article>
+
+
+
   
   
-    </div></section>
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
   
 </section>
         

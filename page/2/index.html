@@ -62,6 +62,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cut命令使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/06/cut命令使用/" class="article-date">
+  <time datetime="2015-12-06T14:42:11.000Z" itemprop="datePublished">2015-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/06/cut命令使用/">cut命令使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前，我们针对行，针对分隔符，抽取某列数据，一般会用awk命令  </p>
+<pre><code><span class="title">awk</span> -F<span class="string">'='</span> <span class="string">'{print <span class="variable">$1</span>}'</span> filename
+</code></pre><p>今天，突然发现对于抽取某一列的情况可以使用cut命令解决这个问题  </p>
+<pre><code>cut <span class="operator">-d</span><span class="string">'='</span> <span class="operator">-f</span> <span class="number">1</span> filename  
+</code></pre><p>但是，cut的使用场景是有限制的  </p>
+<ul>
+<li>分隔符是单字符  </li>
+<li>只获取一个结果列  </li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/06/cut命令使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/06/cut命令使用/" data-id="cii89b69k001bnl4hik1xqyq5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cut/">cut</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-利用GitHub搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/04/利用GitHub搭建个人博客/" class="article-date">
@@ -99,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/利用GitHub搭建个人博客/" data-id="cii5ug9nk000hhn4huwk7bxgn" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/利用GitHub搭建个人博客/" data-id="cii89b696000hnl4hgtkwab1y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
@@ -188,7 +244,7 @@ log_file log_result<span class="comment">
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/" data-id="cii5ug9o4001lhn4hyqxwd6dv" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/" data-id="cii89b69s001qnl4hesb3io2y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/expect/">expect</a></li></ul>
@@ -303,7 +359,7 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之定时任务/" data-id="cii5ug9o1001fhn4hwt10ft15" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之定时任务/" data-id="cii89b69p001knl4h396f36iy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cron/">cron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/定时任务/">定时任务</a></li></ul>
@@ -464,7 +520,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之脚本初次/" data-id="cii5ug9nz001ahn4hw3sic3fd" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之脚本初次/" data-id="cii89b69m001fnl4huodbqva1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/脚本/">脚本</a></li></ul>
@@ -477,66 +533,9 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
 
 
   
-    <article id="post-Git-多Repo配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/04/Git-多Repo配置/" class="article-date">
-  <time datetime="2015-12-04T05:08:24.000Z" itemprop="datePublished">2015-12-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/git/">git</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/Git-多Repo配置/">Git 多Repo配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：</p>
-<h2 id="生成ssh_key">生成ssh key</h2><pre><code>ssh-keygen -t rsa -C <span class="string">"superheizai"</span> <span class="operator">-f</span> ~/.ssh/github
-
--C ：指的是目标GIT repo的用户名
-<span class="operator">-f</span> ：指的是生成密钥的本地地址
-</code></pre><p>   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对应的GIT repo配置</p>
-<h2 id="定义config">定义config</h2><p>  在.ssh下面生成一个config文件，里面配置如下信息：    </p>
-<pre><code>host github<span class="class">.com</span> <span class="id">#GIT</span> REPO域名，比如git@github.com中的github<span class="class">.com</span>
- user git  #用户，一般都是这个,比如git@github.com中的git
- hostname github<span class="class">.com</span>  #可选，指向域名，比如git@github.com中的github<span class="class">.com</span>
- port <span class="number">22</span>  #端口，一般不变
- identityfile ~/.ssh/github <span class="id">#ssh</span> key生成的时候，文件路径
-</code></pre><h2 id="测试连通性">测试连通性</h2><p> ssh -T host # host是config里面定义的host</p>
-<p> 如果提示连通，说明生效了  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="cii5ug9mz0000hn4htscdykp2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多repo/">多repo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -547,7 +546,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -556,7 +555,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -565,7 +564,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
     </div>
   </div>
 
@@ -574,7 +573,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">11</span></li></ul>
     </div>
   </div>
 
@@ -584,6 +583,10 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/15/linux常用查看系统日志命令/">linux常用查看系统日志命令</a>
+          </li>
         
           <li>
             <a href="/2015/12/14/linux后台任务/">linux后台任务</a>
@@ -599,10 +602,6 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
         
           <li>
             <a href="/2015/12/09/logrotate日志处理/">logrotate日志处理</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/06/cut命令使用/">cut命令使用</a>
           </li>
         
       </ul>

@@ -62,6 +62,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-linux常用查看系统日志命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/15/linux常用查看系统日志命令/" class="article-date">
+  <time datetime="2015-12-15T01:25:35.000Z" itemprop="datePublished">2015-12-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/15/linux常用查看系统日志命令/">linux常用查看系统日志命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.centoscn.com/CentOS/help/2014/0310/2540.html" target="_blank" rel="external">本文转自这里</a>  </p>
+<h2 id="系统:">系统:</h2><p>  uname -a     查看内核/操作系统/CPU信息<br>  cat /etc/issue<br>  cat /etc/redhat-release   查看操作系统版本<br>  cat /proc/cpuinfo    查看CPU信息<br>  hostname     查看计算机名<br>  lspci -tv     列出所有PCI设备<br>  lsusb -tv     列出所有USB设备<br>  lsmod      列出加载的内核模块<br>  env      查看环境变量    </p>
+<h2 id="资源：">资源：</h2><p>  free -m     查看内存使用量和交换区使用量<br>  df -h      查看各分区使用情况<br>  du -sh &lt;目录名&gt;    查看指定目录的大小<br>  grep MemTotal /proc/meminfo   查看内存总量<br>  grep MemFree /proc/meminfo   查看空闲内存量<br>  uptime     查看系统运行时间、用户数、负载<br>  cat /proc/loadavg    查看系统负载    </p>
+<h2 id="磁盘和分区：">磁盘和分区：</h2><p>  mount | column -t    查看挂接的分区状态<br>  fdisk -l     查看所有分区<br>  swapon -s     查看所有交换分区<br>  hdparm -i /dev/hda    查看磁盘参数(仅适用于IDE设备)<br>  dmesg | grep IDE    查看启动时IDE设备检测状况    </p>
+<h2 id="网络：">网络：</h2><p>  ifconfig     查看所有网络接口的属性<br>  iptables -L     查看防火墙设置<br>  route -n     查看路由表<br>  netstat -lntp     查看所有监听端口<br>  netstat -antp     查看所有已经建立的连接<br>  netstat -s     查看网络统计信息    </p>
+<h2 id="进程：">进程：</h2><p>  ps -ef     查看所有进程<br>  top      实时显示进程状态（另一篇文章里面有详细的介绍）    </p>
+<h2 id="用户：">用户：</h2><p>  w      查看活动用户<br>  id &lt;用户名&gt;     查看指定用户信息<br>  last      查看用户登录日志<br>  cut -d: -f1 /etc/passwd   查看系统所有用户<br>  cut -d: -f1 /etc/group   查看系统所有组<br>  crontab -l     查看当前用户的计划任务    </p>
+<h2 id="服务：">服务：</h2><p>  chkconfig –list    列出所有系统服务<br>  chkconfig –list | grep on   列出所有启动的系统服务    </p>
+<h2 id="程序：">程序：</h2><p>  rpm -qa       </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/15/linux常用查看系统日志命令/" data-id="cii89b69c000tnl4h6ujzfyvh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-linux后台任务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/14/linux后台任务/" class="article-date">
@@ -104,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/14/linux后台任务/" data-id="cii5ug9nq000thn4hjafg5ocl" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/14/linux后台任务/" data-id="cii89b69f0010nl4h6rbb6dn4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后台任务/">后台任务</a></li></ul>
@@ -184,7 +236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/11/回到顶部按钮/" data-id="cii5ug9ng0009hn4hxtd6zqs0" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/11/回到顶部按钮/" data-id="cii89b6930009nl4hzlpkqund" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回到顶部/">回到顶部</a></li></ul>
@@ -244,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/10/hexo用landscape时，引用类型不起作用/" data-id="cii5ug9nt0010hn4hhizcrrok" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/10/hexo用landscape时，引用类型不起作用/" data-id="cii89b69i0015nl4h7usgf500" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/引用类型/">引用类型</a></li></ul>
@@ -304,7 +356,7 @@ EXITVALUE=$?
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/09/logrotate日志处理/" data-id="cii5ug9no000mhn4h2zt312a6" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/09/logrotate日志处理/" data-id="cii89b69a000mnl4hwdd296ik" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logrotate/">logrotate</a></li></ul>
@@ -317,65 +369,9 @@ EXITVALUE=$?
 
 
   
-    <article id="post-cut命令使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/06/cut命令使用/" class="article-date">
-  <time datetime="2015-12-06T14:42:11.000Z" itemprop="datePublished">2015-12-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Shell/">Shell</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/06/cut命令使用/">cut命令使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前，我们针对行，针对分隔符，抽取某列数据，一般会用awk命令  </p>
-<pre><code><span class="title">awk</span> -F<span class="string">'='</span> <span class="string">'{print <span class="variable">$1</span>}'</span> filename
-</code></pre><p>今天，突然发现对于抽取某一列的情况可以使用cut命令解决这个问题  </p>
-<pre><code>cut <span class="operator">-d</span><span class="string">'='</span> <span class="operator">-f</span> <span class="number">1</span> filename  
-</code></pre><p>但是，cut的使用场景是有限制的  </p>
-<ul>
-<li>分隔符是单字符  </li>
-<li>只获取一个结果列  </li>
-</ul>
-        
-          <p class="article-more-link">
-            <a href="/2015/12/06/cut命令使用/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/06/cut命令使用/" data-id="cii5ug9nw0016hn4hx80sllhx" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cut/">cut</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -386,7 +382,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -395,7 +391,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -404,7 +400,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
     </div>
   </div>
 
@@ -413,7 +409,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">11</span></li></ul>
     </div>
   </div>
 
@@ -423,6 +419,10 @@ EXITVALUE=$?
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/15/linux常用查看系统日志命令/">linux常用查看系统日志命令</a>
+          </li>
         
           <li>
             <a href="/2015/12/14/linux后台任务/">linux后台任务</a>
@@ -438,10 +438,6 @@ EXITVALUE=$?
         
           <li>
             <a href="/2015/12/09/logrotate日志处理/">logrotate日志处理</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/06/cut命令使用/">cut命令使用</a>
           </li>
         
       </ul>
