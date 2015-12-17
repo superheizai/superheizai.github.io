@@ -62,6 +62,106 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-charles使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/17/charles使用/" class="article-date">
+  <time datetime="2015-12-17T09:52:23.000Z" itemprop="datePublished">2015-12-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/工具/">工具</a>►<a class="article-category-link" href="/categories/工具/charles/">charles</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/17/charles使用/">charles使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景">背景</h2><p>刚从windows切换到mac下面的时候，希望能找到一款类似于windows下面fiddler的工具。有一天发现有人在用charles做这样是事情，然后跟身边朋友要了安装软件，装了起来。  </p>
+<p>可能是因为使用场景也比较简单，个人感觉charles比fiddler从总体上来说，更好用。使用它们主要集中在拦截网络请求,模拟发送请求和dns映射三个功能点。也就从这几个点上，来说下自己对charles的使用  </p>
+<h2 id="网络请求拦截">网络请求拦截</h2><p>charles的界面更加整洁。charles提供两种view格式，structure和sequence，我倾向于使用按照时间顺序排列的sequence view。<br><img src="https://7xoxy0.com1.z0.glb.clouddn.com/sequence.png" alt=""><br>这个图可以分为上中下三个部分  </p>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/17/charles使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/17/charles使用/" data-id="ciia5wxsw001ohu4hwca58pza" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fiddler/">fiddler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-修改nginx监听端口" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/17/修改nginx监听端口/" class="article-date">
+  <time datetime="2015-12-17T03:56:23.000Z" itemprop="datePublished">2015-12-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/架构/">架构</a>►<a class="article-category-link" href="/categories/架构/nginx/">nginx</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/17/修改nginx监听端口/">修改nginx监听端口</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="nginx修改默认端口">nginx修改默认端口</h2><p>http的默认服务端口是80，而nginx的默认监听端口是80，所以我们一般不会改变nginx的值。<br>但是，如果我们想改变的话，怎么办呢？</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	 #listen是nginx要监听的端口号</span><br><span class="line">	 listen       <span class="number">9000</span>;</span><br><span class="line">	 </span><br><span class="line">    location / &#123;</span><br><span class="line">        ...</span><br><span class="line">        #这里要在HOST里面设置上相应的端口信息</span><br><span class="line">        proxy_set_header Host <span class="variable">$host</span>:<span class="number">9000</span>;</span><br><span class="line">       ...</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>上面的两句话是这个设置的核心部分</p>
+<ul>
+<li>第一步，listen到我们关心的端口  </li>
+<li>第二步，Host信息中把我们自定义的端口加上  </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/17/修改nginx监听端口/" data-id="ciia5wxsf000mhu4hbjp5fkem" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/端口/">端口</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-linux常用查看系统日志命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/15/linux常用查看系统日志命令/" class="article-date">
@@ -101,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/15/linux常用查看系统日志命令/" data-id="cii89b69c000tnl4h6ujzfyvh" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/15/linux常用查看系统日志命令/" data-id="ciia5wxsl0012hu4hfuti7csn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -156,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/14/linux后台任务/" data-id="cii89b69f0010nl4h6rbb6dn4" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/14/linux后台任务/" data-id="ciia5wxso0019hu4hvcqg16lz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后台任务/">后台任务</a></li></ul>
@@ -236,130 +336,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/11/回到顶部按钮/" data-id="cii89b6930009nl4hzlpkqund" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/11/回到顶部按钮/" data-id="ciia5wxs70009hu4h3tvaf5p8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回到顶部/">回到顶部</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hexo用landscape时，引用类型不起作用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/10/hexo用landscape时，引用类型不起作用/" class="article-date">
-  <time datetime="2015-12-10T09:53:21.000Z" itemprop="datePublished">2015-12-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/git/">git</a>►<a class="article-category-link" href="/categories/git/hexo/">hexo</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/10/hexo用landscape时，引用类型不起作用/">hexo用landscape时，引用类型不起作用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在写笔记的时候，发现用macdown写出的笔记可以被正确识别。但是用hexo生成后，变成了居中的样式了。<br>我查看了我的样式与zipperary的样式的差别，发现了一些端倪。我的这里关于这个样式的定义如下:</p>
-<blockquote>
-<p>.article-entry blockquote {<br> font-family: Georgia, “Times New Roman”, serif;<br> font-size: 1.4em;<br> margin: 1.6em 20px;<br> text-align: center;<br>}  </p>
-</blockquote>
-<p><img src="http://7xoxy0.com1.z0.glb.clouddn.com/css-center.png" alt=""></p>
-<p>这里的text-align是center，居中。而在zipperary的样式中，它引用到了另外一种截然不同的样式:</p>
-<blockquote>
-<p> article .entry blockquote {<br>  background: #f6f6f6;<br>  border-left: 4px solid #999;<br>  font-style: normal;<br>  font-family: Georgia, ‘Times New Roman’, Times, STFangsong, KaiTi, serif;<br>  font-size: 1.2em;<br>  padding: 0 30px 15px;<br>  padding-top: 10px;<br>  padding-bottom: 30px;<br> }  </p>
-</blockquote>
-<p>这里的样式才是我想要，我只能把这段代码复制到style.css里面，并改成一致的名字。最后变成了这样：</p>
-<p><img src="http://7xoxy0.com1.z0.glb.clouddn.com/css-normal.png" alt=""></p>
-<hr>
-<p>PS：这个解决方案并不彻底，只是解决了表面现象。<br>需要在themes/landscape/source/css/_partial/article.styl中，找到.article-entry中的blockquote节点,把里面的内容替换为上面的内容，注意三点： </p>
-<ul>
-<li>style文件中，每行不需要“；”结尾    </li>
-<li>空格缩进要注意，否则运行时候会报错，或者不报错，但是没有生成新的样式文件</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/10/hexo用landscape时，引用类型不起作用/" data-id="cii89b69i0015nl4h7usgf500" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/引用类型/">引用类型</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-logrotate日志处理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/09/logrotate日志处理/" class="article-date">
-  <time datetime="2015-12-09T09:44:31.000Z" itemprop="datePublished">2015-12-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Shell/">Shell</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/09/logrotate日志处理/">logrotate日志处理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="概要">概要</h2><p>logrotate是日志处理脚本，可以按照时间维度，天，日，月或者年来执行，也可以按照文件大小来执行。<br>logrotate是通过cron定时任务来执行的，其入口文件在/etc/logrotate.conf里面.在centos上可以查看/etc下面cron相关配置中，可以看到相关的配置。</p>
-<blockquote>
-<p>在anacrontab中定义了执行cron.daily下面的所有文件(run-parts)<br>run-parts /etc/cron.daily<br>在/etc/cron.daily文件夹下面，有logrotate文件</p>
-</blockquote>
-<pre><code><span class="shebang">#!/bin/sh
-</span>
-/usr/sbin/logrotate /etc/logrotate.conf  &gt;/dev/null <span class="number">2</span> &gt;&amp;<span class="number">1</span>
-EXITVALUE=$?
-<span class="keyword">if</span> [ <span class="variable">$EXITVALUE</span> != <span class="number">0</span> ]; <span class="keyword">then</span>
-/usr/bin/logger -t logrotate <span class="string">"ALERT exited abnormally with         [<span class="variable">$EXITVALUE</span>]"</span>
-<span class="keyword">fi</span>
-<span class="built_in">exit</span> <span class="number">0</span>
-</code></pre>
-        
-          <p class="article-more-link">
-            <a href="/2015/12/09/logrotate日志处理/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/09/logrotate日志处理/" data-id="cii89b69a000mnl4hwdd296ik" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logrotate/">logrotate</a></li></ul>
 
     </footer>
   </div>
@@ -382,7 +362,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/charles/">charles</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/架构/nginx/">nginx</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -391,7 +371,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -400,7 +380,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/fiddler/" style="font-size: 10px;">fiddler</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
     </div>
   </div>
 
@@ -409,7 +389,7 @@ EXITVALUE=$?
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">11</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -421,6 +401,14 @@ EXITVALUE=$?
       <ul>
         
           <li>
+            <a href="/2015/12/17/charles使用/">charles使用</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/17/修改nginx监听端口/">修改nginx监听端口</a>
+          </li>
+        
+          <li>
             <a href="/2015/12/15/linux常用查看系统日志命令/">linux常用查看系统日志命令</a>
           </li>
         
@@ -430,14 +418,6 @@ EXITVALUE=$?
         
           <li>
             <a href="/2015/12/11/回到顶部按钮/">回到顶部按钮</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/10/hexo用landscape时，引用类型不起作用/">hexo用landscape时，引用类型不起作用</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/09/logrotate日志处理/">logrotate日志处理</a>
           </li>
         
       </ul>
