@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git回滚操作 | superheizai的私人厨房</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在日常工作中，git的回滚操作，主要接触到了三种，分别是本地修改，本地提交(commit)和远程提交(push)。就这三种不同的场景，分别记录下不同的回滚方式。  
+本地修改本地修改的内容只是体现在当前文件中，如果未保存而关闭了编辑器的话，那么当前的修改会丢失，找不回来。对本地修改的回滚操作是通过checkout命令来完成的  
+
+某个特定文件：git checkout filename  
+全部">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git回滚操作">
+<meta property="og:url" content="superheizai.github.io/2016/01/07/git回滚操作/index.html">
+<meta property="og:site_name" content="superheizai的私人厨房">
+<meta property="og:description" content="在日常工作中，git的回滚操作，主要接触到了三种，分别是本地修改，本地提交(commit)和远程提交(push)。就这三种不同的场景，分别记录下不同的回滚方式。  
+本地修改本地修改的内容只是体现在当前文件中，如果未保存而关闭了编辑器的话，那么当前的修改会丢失，找不回来。对本地修改的回滚操作是通过checkout命令来完成的  
+
+某个特定文件：git checkout filename  
+全部">
+<meta property="og:image" content="http://www.liaoxuefeng.com/files/attachments/001384907702917346729e9afbf4127b6dfbae9207af016000/0">
+<meta property="og:updated_time" content="2016-01-07T04:22:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git回滚操作">
+<meta name="twitter:description" content="在日常工作中，git的回滚操作，主要接触到了三种，分别是本地修改，本地提交(commit)和远程提交(push)。就这三种不同的场景，分别记录下不同的回滚方式。  
+本地修改本地修改的内容只是体现在当前文件中，如果未保存而关闭了编辑器的话，那么当前的修改会丢失，找不回来。对本地修改的回滚操作是通过checkout命令来完成的  
+
+某个特定文件：git checkout filename  
+全部">
+  
+    <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">superheizai的私人厨房</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="superheizai.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-git回滚操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/07/git回滚操作/" class="article-date">
+  <time datetime="2016-01-07T01:26:23.000Z" itemprop="datePublished">2016-01-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git回滚操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在日常工作中，git的回滚操作，主要接触到了三种，分别是本地修改，本地提交(commit)和远程提交(push)。就这三种不同的场景，分别记录下不同的回滚方式。  </p>
+<h1 id="本地修改">本地修改</h1><p>本地修改的内容只是体现在当前文件中，如果未保存而关闭了编辑器的话，那么当前的修改会丢失，找不回来。<br>对本地修改的回滚操作是通过checkout命令来完成的  </p>
+<ul>
+<li>某个特定文件：git checkout filename  </li>
+<li>全部文件：git checkout .  </li>
+</ul>
+<h1 id="本地提交(commit)">本地提交(commit)</h1><p>本地已提交，可以通过commit log(git log或者git reflog)查看local repo里面代码提交记录，但是在远程repo不存在相关提交。<br>对于本地提交的回滚是通过reset操作来完成的  </p>
+<h2 id="reset三种模式">reset三种模式</h2><p><a href="http://www.tech126.com/git-reset/" target="_blank" rel="external">参考高飞鸟博客</a><br><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013745374151782eb658c5a5ca454eaa451661275886c6000" target="_blank" rel="external">参考廖雪峰博客</a>  </p>
+<p>   <img src="http://www.liaoxuefeng.com/files/attachments/001384907702917346729e9afbf4127b6dfbae9207af016000/0" alt="参考自廖雪峰博客"></p>
+<ul>
+<li>mixed（默认），它回退到某个版本，只保留源码，回退commit和stage信息</li>
+<li>soft，回退到某个版本，只回退了commit的信息，不会恢复到stage file一级。如果还要提交，直接commit即可</li>
+<li>hard，彻底回退到某个版本，本地的源码也会变为上一个版本的内容</li>
+</ul>
+<h2 id="使用例子">使用例子</h2><blockquote>
+<p>//回退所有内容到上一个版本<br>git reset HEAD^<br>//回退a.py这个文件的版本到上一个版本<br>git reset HEAD^ a.py<br>//向前回退到第3个版本<br>git reset –soft HEAD~3<br>//将本地的状态回退到和远程的一样<br>git reset –hard origin/master<br>//回退到某个版本<br>git reset 057d  </p>
+</blockquote>
+<h1 id="远程提交(push)">远程提交(push)</h1><p>   <a href="http://hanhan2611.blog.163.com/blog/static/2075771392014428102714312/" target="_blank" rel="external">参考韩小虎的技术博客</a><br>     <a href="http://yijiebuyi.com/blog/8f985d539566d0bf3b804df6be4e0c90.html" target="_blank" rel="external">参考一介布衣博客</a></p>
+<p>对于远程提交来说，代码已经同步到远程仓库，这个时候在本地用reset是可以把本地的分支回滚到某个时间点。但是，在做代码合并的时候仍然会从远程仓库里面拿到之前已经提交过的修改。<br>revert和reset针对本地commit的区别，revert会产生一个针对此commit的逆操作，而reset是撤销这个操作。revert可以解决这个问题。而且revert只是针对单词commit的逆操作，而reset是直接到回滚到第n个commit。revert和reset还有其它的一些区别，这里不再详述。  </p>
+<h2 id="回滚某次提交">回滚某次提交</h2><blockquote>
+<p>git revert commitid</p>
+</blockquote>
+<p>  这种情况最常见，是说针对某个文件做了错误的修改，你想恢复之前的状态，那么可以直接revert这个commit，然后再做相应的修改，然后再次提交。这里的revert会把所有的修改revert掉，所以相关的操作最好一起做commit。</p>
+<h2 id="回滚某次merge">回滚某次merge</h2><blockquote>
+<p>git revert -m 1 commitId    </p>
+</blockquote>
+<p>   回滚某次merge的最主要的点是，你要提供出你要回滚到出现本次merge的commit，你要回滚到的分支commit出现的顺序，比如语法中使用的1.      </p>
+<p>   当你使用 git revert 撤销一个 merge commit 时，如果除了 commit 号而不加任何其他参数，git 将会提示错误：</p>
+<blockquote>
+<p>$ git revert 83281a8e9aa1ede58d51a6dd78d5414dd9bc8548 //本人实际git信息，这里对应git演进图中的 g<br>error: Commit g is a merge but no -m option was given.<br>fatal: revert failed</p>
+</blockquote>
+<p>在你合并两个分支并试图撤销时，Git 并不知道你到底需要保留哪一个分支上所做的修改。从 Git 的角度来看，master 分支和 dev 在地位上是完全平等的，只是在 workflow 中，master 被人为约定成了「主分支」。</p>
+<p>于是 Git 需要你通过 m 或 mainline 参数来指定「主线」。merge commit 的 parents 一定是在两个不同的线索上，因此可以通过 parent 来表示「主线」。m 参数的值可以是 1 或者 2，对应着 parent 在 merge commit 信息中的顺序。</p>
+<p>以上面那张图为例，我们查看 commit g 的内容：</p>
+<blockquote>
+<p>$ git show 83281a8e9aa1ede58d51a6dd78d5414dd9bc8548 //本人实际git信息，这里对应git演进图中的 g</p>
+<p>commit 83281a8e9aa1ede58d51a6dd78d5414dd9bc8548   </p>
+<p>Merge: 312a518 fa87415 //312a518和fa87415 可以在git log中找到对应的提交信息（只是commit一长串字符的头部分）<br>……</p>
+</blockquote>
+<p>那么，$ git revert -m 1 g 将会保留 master 分支上的修改，撤销 dev 分支上的修改。//(1就是1，表示312a518对应的父来源，2表示fa87415对应的父来源)撤销成功之后，Git 将会生成一个新的 Commit，提交历史就成了这样：</p>
+<pre><code>a<span class="function"> -&gt;</span> b<span class="function"> -&gt;</span> c<span class="function"> -&gt;</span> f -- g<span class="function"> -&gt;</span> h<span class="function"> -&gt;</span> G (master)
+              <span class="string">\</span>      /
+                   d<span class="function"> -&gt;</span> e  (dev)
+</code></pre><p>其中 G 是撤销 g 生成的 commit。通过 $ git show G 之后，我们会发现 G 是一个常规提交，内容就是撤销 merge 时被丢弃的那条线索的所有 commit 的「反操作」的合集。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2016/01/07/git回滚操作/" data-id="cij3r0h3n001qzi4hdjewxzxd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reset/">reset</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/revert/">revert</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回滚/">回滚</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/18/ELK搭建/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ELK搭建</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/charles/">charles</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/架构/ELK/">ELK</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/nginx/">nginx</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kibana/">kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logstash/">logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reset/">reset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/revert/">revert</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回滚/">回滚</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/Shell/" style="font-size: 15px;">Shell</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/fiddler/" style="font-size: 10px;">fiddler</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/kibana/" style="font-size: 10px;">kibana</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/logstash/" style="font-size: 10px;">logstash</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/reset/" style="font-size: 10px;">reset</a> <a href="/tags/revert/" style="font-size: 10px;">revert</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/回滚/" style="font-size: 10px;">回滚</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">15</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/01/07/git回滚操作/">git回滚操作</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/18/ELK搭建/">ELK搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/18/mysql乐观锁与悲观锁的浅读/">mysql乐观锁与悲观锁的浅读</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/17/charles使用/">charles使用</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/17/修改nginx监听端口/">修改nginx监听端口</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="linkslist">
+  <p class="asidetitle">links</p>
+    <ul>
+    
+      <li><a href="http://zipperary.com/" target="_blank" title="Zippera&#39;s Blog">Zippera&#39;s Blog</a></li>
+    
+      <li><a href="http://github.com" target="_blank" title="本博客托管在github pages">github</a></li>
+    
+      <li><a href="http://hexo.io" target="_blank" title="本博客使用hexo搭建">hexo</a></li>
+    
+    </ul>
+</div>
+
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 ；刘建刚<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//7xoxy0.com1.z0.glb.clouddn.com/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/totop.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

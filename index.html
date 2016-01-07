@@ -62,6 +62,188 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git回滚操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/07/git回滚操作/" class="article-date">
+  <time datetime="2016-01-07T01:26:23.000Z" itemprop="datePublished">2016-01-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/07/git回滚操作/">git回滚操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在日常工作中，git的回滚操作，主要接触到了三种，分别是本地修改，本地提交(commit)和远程提交(push)。就这三种不同的场景，分别记录下不同的回滚方式。  </p>
+<h1 id="本地修改">本地修改</h1><p>本地修改的内容只是体现在当前文件中，如果未保存而关闭了编辑器的话，那么当前的修改会丢失，找不回来。<br>对本地修改的回滚操作是通过checkout命令来完成的  </p>
+<ul>
+<li>某个特定文件：git checkout filename  </li>
+<li>全部文件：git checkout .  </li>
+</ul>
+<h1 id="本地提交(commit)">本地提交(commit)</h1><p>本地已提交，可以通过commit log(git log或者git reflog)查看local repo里面代码提交记录，但是在远程repo不存在相关提交。<br>对于本地提交的回滚是通过reset操作来完成的  </p>
+<h2 id="reset三种模式">reset三种模式</h2><p><a href="http://www.tech126.com/git-reset/" target="_blank" rel="external">参考高飞鸟博客</a><br><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013745374151782eb658c5a5ca454eaa451661275886c6000" target="_blank" rel="external">参考廖雪峰博客</a>  </p>
+<p>   <img src="http://www.liaoxuefeng.com/files/attachments/001384907702917346729e9afbf4127b6dfbae9207af016000/0" alt="参考自廖雪峰博客"></p>
+<ul>
+<li>mixed（默认），它回退到某个版本，只保留源码，回退commit和stage信息</li>
+<li>soft，回退到某个版本，只回退了commit的信息，不会恢复到stage file一级。如果还要提交，直接commit即可</li>
+<li>hard，彻底回退到某个版本，本地的源码也会变为上一个版本的内容</li>
+</ul>
+<h2 id="使用例子">使用例子</h2><blockquote>
+<p>//回退所有内容到上一个版本<br>git reset HEAD^<br>//回退a.py这个文件的版本到上一个版本<br>git reset HEAD^ a.py<br>//向前回退到第3个版本<br>git reset –soft HEAD~3<br>//将本地的状态回退到和远程的一样<br>git reset –hard origin/master<br>//回退到某个版本<br>git reset 057d  </p>
+</blockquote>
+<h1 id="远程提交(push)">远程提交(push)</h1><p>   <a href="http://hanhan2611.blog.163.com/blog/static/2075771392014428102714312/" target="_blank" rel="external">参考韩小虎的技术博客</a><br>     <a href="http://yijiebuyi.com/blog/8f985d539566d0bf3b804df6be4e0c90.html" target="_blank" rel="external">参考一介布衣博客</a></p>
+<p>对于远程提交来说，代码已经同步到远程仓库，这个时候在本地用reset是可以把本地的分支回滚到某个时间点。但是，在做代码合并的时候仍然会从远程仓库里面拿到之前已经提交过的修改。<br>revert和reset针对本地commit的区别，revert会产生一个针对此commit的逆操作，而reset是撤销这个操作。revert可以解决这个问题。而且revert只是针对单词commit的逆操作，而reset是直接到回滚到第n个commit。revert和reset还有其它的一些区别，这里不再详述。  </p>
+<h2 id="回滚某次提交">回滚某次提交</h2><blockquote>
+<p>git revert commitid</p>
+</blockquote>
+<p>  这种情况最常见，是说针对某个文件做了错误的修改，你想恢复之前的状态，那么可以直接revert这个commit，然后再做相应的修改，然后再次提交。这里的revert会把所有的修改revert掉，所以相关的操作最好一起做commit。</p>
+<h2 id="回滚某次merge">回滚某次merge</h2><blockquote>
+<p>git revert -m 1 commitId    </p>
+</blockquote>
+<p>   回滚某次merge的最主要的点是，你要提供出你要回滚到出现本次merge的commit，你要回滚到的分支commit出现的顺序，比如语法中使用的1.      </p>
+<p>   当你使用 git revert 撤销一个 merge commit 时，如果除了 commit 号而不加任何其他参数，git 将会提示错误：</p>
+<blockquote>
+<p>$ git revert 83281a8e9aa1ede58d51a6dd78d5414dd9bc8548 //本人实际git信息，这里对应git演进图中的 g<br>error: Commit g is a merge but no -m option was given.<br>fatal: revert failed</p>
+</blockquote>
+<p>在你合并两个分支并试图撤销时，Git 并不知道你到底需要保留哪一个分支上所做的修改。从 Git 的角度来看，master 分支和 dev 在地位上是完全平等的，只是在 workflow 中，master 被人为约定成了「主分支」。</p>
+<p>于是 Git 需要你通过 m 或 mainline 参数来指定「主线」。merge commit 的 parents 一定是在两个不同的线索上，因此可以通过 parent 来表示「主线」。m 参数的值可以是 1 或者 2，对应着 parent 在 merge commit 信息中的顺序。</p>
+<p>以上面那张图为例，我们查看 commit g 的内容：</p>
+<blockquote>
+<p>$ git show 83281a8e9aa1ede58d51a6dd78d5414dd9bc8548 //本人实际git信息，这里对应git演进图中的 g</p>
+<p>commit 83281a8e9aa1ede58d51a6dd78d5414dd9bc8548   </p>
+<p>Merge: 312a518 fa87415 //312a518和fa87415 可以在git log中找到对应的提交信息（只是commit一长串字符的头部分）<br>……</p>
+</blockquote>
+<p>那么，$ git revert -m 1 g 将会保留 master 分支上的修改，撤销 dev 分支上的修改。//(1就是1，表示312a518对应的父来源，2表示fa87415对应的父来源)撤销成功之后，Git 将会生成一个新的 Commit，提交历史就成了这样：</p>
+<pre><code>a<span class="function"> -&gt;</span> b<span class="function"> -&gt;</span> c<span class="function"> -&gt;</span> f -- g<span class="function"> -&gt;</span> h<span class="function"> -&gt;</span> G (master)
+              <span class="string">\</span>      /
+                   d<span class="function"> -&gt;</span> e  (dev)
+</code></pre><p>其中 G 是撤销 g 生成的 commit。通过 $ git show G 之后，我们会发现 G 是一个常规提交，内容就是撤销 merge 时被丢弃的那条线索的所有 commit 的「反操作」的合集。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2016/01/07/git回滚操作/" data-id="cij3r0h3n001qzi4hdjewxzxd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reset/">reset</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/revert/">revert</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回滚/">回滚</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ELK搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/18/ELK搭建/" class="article-date">
+  <time datetime="2015-12-18T03:24:06.000Z" itemprop="datePublished">2015-12-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/架构/">架构</a>►<a class="article-category-link" href="/categories/架构/ELK/">ELK</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/18/ELK搭建/">ELK搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>自己的机器上有些nginx，应用服务器和其它agent，我想有个统一的界面，方便去看他们的日志。所以，自己花费了大概两天的时间去搭建这个平台。  </p>
+<p>题外话，为什么花2天时间才搭好了这个平台呢？因为我用的是新版本的ELK，然后按照网上的老版本搭建方法搭建的时候，碰到了各种问题，花了两天时间才弄好。另外，很多资料都是ELK加上redis一起来实现日志平台的，我这里只是搭建一个简单的自用的看日志的工具，所以没有把redis加进来。 </p>
+<p>现在这些应用只是起来了，是不是真正解决了问题，还不确定。还需要以后继续深入学习，看看后续是不是需要新增功能，或者把redis加进来。  </p>
+<h2 id="准备">准备</h2><p>既然是学习性质的，所以希望更有些前瞻性，基本上所有的套件都是最新的。各个套件的版本如下：  </p>
+<ul>
+<li>logstash=&gt;2.1.1  </li>
+<li>elasticsearch=&gt;2.1.0   </li>
+<li>kibana=&gt;4.3.0  </li>
+</ul>
+<p>这三个套件均可直接从<a href="https://www.elastic.co/downloads">elasic.io</a>上下载  </p>
+<p>另外，elasticsearch对JDK的推荐是1.8。使用1.7的话，要修改JAVA_OPTS，增加JAVA启动参数。而且，后面每次执行命令，都会提示让我升级，所以就切换到了1.8.  </p>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/18/ELK搭建/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/18/ELK搭建/" data-id="cij3r0h220000zi4haf7krg5m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ELK/">ELK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kibana/">kibana</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logstash/">logstash</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-mysql乐观锁与悲观锁的浅读" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/18/mysql乐观锁与悲观锁的浅读/" class="article-date">
+  <time datetime="2015-12-18T03:23:26.000Z" itemprop="datePublished">2015-12-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/18/mysql乐观锁与悲观锁的浅读/">mysql乐观锁与悲观锁的浅读</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/18/mysql乐观锁与悲观锁的浅读/" data-id="cij3r0h390010zi4hij9eccav" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-charles使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/17/charles使用/" class="article-date">
@@ -99,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/17/charles使用/" data-id="ciia5wxsw001ohu4hwca58pza" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/17/charles使用/" data-id="cij3r0h3u0023zi4hxj7m4f6j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fiddler/">fiddler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li></ul>
@@ -149,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/17/修改nginx监听端口/" data-id="ciia5wxsf000mhu4hbjp5fkem" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/17/修改nginx监听端口/" data-id="cij3r0h36000szi4htsdz68ta" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/端口/">端口</a></li></ul>
@@ -162,196 +344,9 @@
 
 
   
-    <article id="post-linux常用查看系统日志命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/15/linux常用查看系统日志命令/" class="article-date">
-  <time datetime="2015-12-15T01:25:35.000Z" itemprop="datePublished">2015-12-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/15/linux常用查看系统日志命令/">linux常用查看系统日志命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://www.centoscn.com/CentOS/help/2014/0310/2540.html" target="_blank" rel="external">本文转自这里</a>  </p>
-<h2 id="系统:">系统:</h2><p>  uname -a     查看内核/操作系统/CPU信息<br>  cat /etc/issue<br>  cat /etc/redhat-release   查看操作系统版本<br>  cat /proc/cpuinfo    查看CPU信息<br>  hostname     查看计算机名<br>  lspci -tv     列出所有PCI设备<br>  lsusb -tv     列出所有USB设备<br>  lsmod      列出加载的内核模块<br>  env      查看环境变量    </p>
-<h2 id="资源：">资源：</h2><p>  free -m     查看内存使用量和交换区使用量<br>  df -h      查看各分区使用情况<br>  du -sh &lt;目录名&gt;    查看指定目录的大小<br>  grep MemTotal /proc/meminfo   查看内存总量<br>  grep MemFree /proc/meminfo   查看空闲内存量<br>  uptime     查看系统运行时间、用户数、负载<br>  cat /proc/loadavg    查看系统负载    </p>
-<h2 id="磁盘和分区：">磁盘和分区：</h2><p>  mount | column -t    查看挂接的分区状态<br>  fdisk -l     查看所有分区<br>  swapon -s     查看所有交换分区<br>  hdparm -i /dev/hda    查看磁盘参数(仅适用于IDE设备)<br>  dmesg | grep IDE    查看启动时IDE设备检测状况    </p>
-<h2 id="网络：">网络：</h2><p>  ifconfig     查看所有网络接口的属性<br>  iptables -L     查看防火墙设置<br>  route -n     查看路由表<br>  netstat -lntp     查看所有监听端口<br>  netstat -antp     查看所有已经建立的连接<br>  netstat -s     查看网络统计信息    </p>
-<h2 id="进程：">进程：</h2><p>  ps -ef     查看所有进程<br>  top      实时显示进程状态（另一篇文章里面有详细的介绍）    </p>
-<h2 id="用户：">用户：</h2><p>  w      查看活动用户<br>  id &lt;用户名&gt;     查看指定用户信息<br>  last      查看用户登录日志<br>  cut -d: -f1 /etc/passwd   查看系统所有用户<br>  cut -d: -f1 /etc/group   查看系统所有组<br>  crontab -l     查看当前用户的计划任务    </p>
-<h2 id="服务：">服务：</h2><p>  chkconfig –list    列出所有系统服务<br>  chkconfig –list | grep on   列出所有启动的系统服务    </p>
-<h2 id="程序：">程序：</h2><p>  rpm -qa       </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/15/linux常用查看系统日志命令/" data-id="ciia5wxsl0012hu4hfuti7csn" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/command/">command</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux后台任务" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/14/linux后台任务/" class="article-date">
-  <time datetime="2015-12-14T10:36:26.000Z" itemprop="datePublished">2015-12-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/14/linux后台任务/">linux后台任务</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="后台任务的相关命令">后台任务的相关命令</h2><p>&amp;, bg, jobs, fg, ctrl+z, ctrl+c<br><a href="http://www.centoscn.com/CentOS/help/2015/0311/4854.html" target="_blank" rel="external">本文转自这里</a></p>
-<h2 id="&amp;">&amp;</h2><p>加入一个命令行后面，让这个命令在后台执行  </p>
-<h2 id="ctrl+z">ctrl+z</h2><p>讲一个前台执行的命令放到后台，并置成暂停状态  </p>
-<h2 id="jobs">jobs</h2><p>查看当前的后台任务，job的状态可以使running，stopped和terminated。-l 选项可显示所有任务PID。  </p>
-<h2 id="fg_%jobnumber">fg %jobnumber</h2><p>将后台任务调至前台运行</p>
-<h2 id="bg_%jobnumber">bg %jobnumber</h2><p>让在后台暂停的任务继续运行</p>
-<h2 id="ctrl+c">ctrl+c</h2><p>终止一个前台进程。<br>对于后台进程来说，有两种方法 </p>
-<ul>
-<li>kill %jobnumber  </li>
-<li>kill pid  </li>
-</ul>
-<h2 id="nohup">nohup</h2><p>如果让程序在后台执行，即使关闭当前的终端也执行（之前的&amp;做不到），这时候需要nohup。该命令可以在你退出账户/关闭终端之后继续运行相应的进程。关闭中断后，在另外一个终端已经不能够用jobs看到后台跑的程序，可以用ps来查看.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/14/linux后台任务/" data-id="ciia5wxso0019hu4hvcqg16lz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后台任务/">后台任务</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-回到顶部按钮" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/11/回到顶部按钮/" class="article-date">
-  <time datetime="2015-12-11T08:09:10.000Z" itemprop="datePublished">2015-12-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/git/">git</a>►<a class="article-category-link" href="/categories/git/hexo/">hexo</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/11/回到顶部按钮/">回到顶部按钮</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这两天想给这个在线笔记增加一个回到顶部的功能.</p>
-<h2 id="解决问题">解决问题</h2><p>在网上搜索了下，找到了两种基本的解决方案。典型例子的链接，在下面的参考资料中会给出. 我用第二个。为啥用第二个，是因为好看，方便还是啥原因？因为第一个不生效，然后用第二个还没生效，就在第二个上面解决问题，也就用了第二个。不过，第二个确实比第一个好看，还有个动态页面比例。<br>我这里要说的是，解决回到顶部按钮失效的问题。怎么破？给这个div加上<strong><code>z-index:9999999</code></strong>属性！</p>
-<pre><code><span class="tag">&lt;<span class="title">style</span> <span class="attribute">id</span>=<span class="value">'inline-css'</span> <span class="attribute">type</span>=<span class="value">'text/css'</span>&gt;</span><span class="css">  
-<span class="id">#backtoTop</span><span class="rules">{
-<span class="rule"><span class="attribute">background-color</span>:<span class="value"><span class="hexcolor">#eee</span></span></span>;
-<span class="rule"><span class="attribute">border-radius</span>:<span class="value"><span class="number">100%</span></span></span>;
-<span class="rule"><span class="attribute">bottom</span>:<span class="value"><span class="number">10%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">48px</span></span></span>;
-<span class="rule"><span class="attribute">position</span>:<span class="value">fixed</span></span>;
-<span class="rule"><span class="attribute">right</span>:<span class="value">-<span class="number">100px</span></span></span>;
-<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">48px</span></span></span>;
-<span class="rule"><span class="attribute">transition</span>:<span class="value"><span class="number">0.5s</span></span></span>;
-<span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"><span class="number">0.5s</span></span></span>;
-<span class="rule"><span class="attribute">z-index</span>:<span class="value"> <span class="number">9999999</span></span></span></span>}  
-
-<span class="id">#backtoTop</span><span class="class">.button--show</span><span class="rules">{
-<span class="rule"><span class="attribute">right</span>:<span class="value"><span class="number">10px</span></span></span></span>}  
-
-<span class="class">.per</span><span class="rules">{
-<span class="rule"><span class="attribute">font-size</span>:<span class="value"><span class="number">16px</span></span></span>;
-<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">48px</span></span></span>;
-<span class="rule"><span class="attribute">line-height</span>:<span class="value"><span class="number">48px</span></span></span>;
-<span class="rule"><span class="attribute">position</span>:<span class="value">absolute</span></span>;
-<span class="rule"><span class="attribute">text-align</span>:<span class="value">center</span></span>;
-<span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">0</span></span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">48px</span></span></span>;
-<span class="rule"><span class="attribute">color</span>:<span class="value"><span class="hexcolor">#555</span></span></span>;<span class="rule"><span class="attribute">cursor</span>:<span class="value">pointer</span></span></span>}
-
-<span class="class">.per</span><span class="pseudo">:before</span><span class="rules">{
-<span class="rule"><span class="attribute">content</span>:<span class="value"><span class="function">attr</span>(data-percent)</span></span></span>}  
-
-<span class="class">.per</span><span class="pseudo">:hover</span><span class="pseudo">:before</span><span class="rules">{
-<span class="rule"><span class="attribute">content</span>:<span class="value"><span class="string">"↑"</span></span></span>;<span class="rule"><span class="attribute">font-size</span>:<span class="value"><span class="number">20px</span></span></span></span>}  
-</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>  
-</code></pre>
-        
-          <p class="article-more-link">
-            <a href="/2015/12/11/回到顶部按钮/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/11/回到顶部按钮/" data-id="ciia5wxs70009hu4h3tvaf5p8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回到顶部/">回到顶部</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -362,7 +357,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/charles/">charles</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/架构/nginx/">nginx</a><span class="category-list-count">1</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/charles/">charles</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/架构/ELK/">ELK</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/nginx/">nginx</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -371,7 +366,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kibana/">kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logstash/">logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reset/">reset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/revert/">revert</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回滚/">回滚</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -380,7 +375,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/fiddler/" style="font-size: 10px;">fiddler</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+      <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/Shell/" style="font-size: 15px;">Shell</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/fiddler/" style="font-size: 10px;">fiddler</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/kibana/" style="font-size: 10px;">kibana</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/logstash/" style="font-size: 10px;">logstash</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/reset/" style="font-size: 10px;">reset</a> <a href="/tags/revert/" style="font-size: 10px;">revert</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/回滚/" style="font-size: 10px;">回滚</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
     </div>
   </div>
 
@@ -389,7 +384,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">15</span></li></ul>
     </div>
   </div>
 
@@ -401,23 +396,23 @@
       <ul>
         
           <li>
+            <a href="/2016/01/07/git回滚操作/">git回滚操作</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/18/ELK搭建/">ELK搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/18/mysql乐观锁与悲观锁的浅读/">mysql乐观锁与悲观锁的浅读</a>
+          </li>
+        
+          <li>
             <a href="/2015/12/17/charles使用/">charles使用</a>
           </li>
         
           <li>
             <a href="/2015/12/17/修改nginx监听端口/">修改nginx监听端口</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/15/linux常用查看系统日志命令/">linux常用查看系统日志命令</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/14/linux后台任务/">linux后台任务</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/11/回到顶部按钮/">回到顶部按钮</a>
           </li>
         
       </ul>
@@ -448,7 +443,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 ；刘建刚<br>
+      &copy; 2016 ；刘建刚<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

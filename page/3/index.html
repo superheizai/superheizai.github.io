@@ -62,6 +62,201 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cut命令使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/06/cut命令使用/" class="article-date">
+  <time datetime="2015-12-06T14:42:11.000Z" itemprop="datePublished">2015-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/06/cut命令使用/">cut命令使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前，我们针对行，针对分隔符，抽取某列数据，一般会用awk命令  </p>
+<pre><code><span class="title">awk</span> -F<span class="string">'='</span> <span class="string">'{print <span class="variable">$1</span>}'</span> filename
+</code></pre><p>今天，突然发现对于抽取某一列的情况可以使用cut命令解决这个问题  </p>
+<pre><code>cut <span class="operator">-d</span><span class="string">'='</span> <span class="operator">-f</span> <span class="number">1</span> filename  
+</code></pre><p>但是，cut的使用场景是有限制的  </p>
+<ul>
+<li>分隔符是单字符  </li>
+<li>只获取一个结果列  </li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/06/cut命令使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/06/cut命令使用/" data-id="cij3r0h3r001zzi4herpis8zn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cut/">cut</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-利用GitHub搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/04/利用GitHub搭建个人博客/" class="article-date">
+  <time datetime="2015-12-04T14:55:27.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/利用GitHub搭建个人博客/">利用GitHub搭建个人博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="hexo设置">hexo设置</h1><h2 id="hexo安装与设置">hexo安装与设置</h2><ul>
+<li>nvm.sh设置，安装nvm的时候，会提示把nvm设置PATH中，并在PATH中运行nvm.sh</li>
+<li>node设置，node是npm和hexo运行的基础，所以必须先设置node的path</li>
+<li>npm设置</li>
+<li>hexo设置</li>
+</ul>
+<p>##</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/04/利用GitHub搭建个人博客/" data-id="cij3r0h33000mzi4hp5bewead" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Shell之except模拟交互脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/04/Shell之except模拟交互脚本/" class="article-date">
+  <time datetime="2015-12-04T08:55:15.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Shell/">Shell</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/Shell之except模拟交互脚本/">Shell之except模拟交互脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景">背景</h2><p> 由于需要写个脚本自动SSH到云主机，启动某个服务，所以写了这个脚本。中间有段时间一直登陆失败，后来查看下来，原来是因为开启了VPN。  </p>
+<h2 id="代码及其分析">代码及其分析</h2><p> 先来一份代码示例<br>      //1</p>
+<pre><code> <span class="comment">#!/usr/bin/expect </span>
+
+  <span class="comment"> //2</span>
+<span class="built_in">set</span> user user 
+<span class="built_in">set</span> pwd pwd
+<span class="built_in">set</span> server <span class="number">10.199</span>.XXX.XX
+
+<span class="comment">
+//3</span>
+spawn ssh $user@$server -p <span class="number">22</span><span class="comment">
+//9 </span>
+send_user <span class="string">"start ssh\n"</span><span class="comment">
+//4</span>
+expect  {
+   <span class="string">"*password:"</span> {<span class="built_in">send</span> $pwd\r}
+   <span class="string">"yes/no"</span> {<span class="built_in">send</span> <span class="string">"yes\r"</span>}
+}
+expect <span class="string">"]#"</span><span class="comment">
+//10</span>
+log_file log_result<span class="comment">
+//5</span>
+<span class="built_in">send</span> <span class="string">"ps -ef\r"</span><span class="comment">
+//6  </span>
+<span class="built_in">send</span> <span class="string">"ret=`echo $?`\r"</span>
+<span class="built_in">send</span> <span class="string">"exit \$ret\r"</span><span class="comment">
+//7</span>
+<span class="comment">#interact</span><span class="comment">
+//8</span>
+<span class="comment">#expect eof</span>
+</code></pre><p>这里简单介绍下我的这段代码：  </p>
+<ol>
+<li>定义此脚本是通过/usr/bin/expect来执行。如果没有这行直接执行，会告诉你spawn，send等命令找不到  </li>
+<li>此处的代码是设置shell里面的变量  </li>
+<li>spawn命令会启动一个进程，用来给ssh运行进程加个壳，传递交互指令。再强调一次，spawn是进入expect之后才可以看到的指令，用which spawn是看不到spawn命令的  </li>
+<li>expect可以有一个或者多个返回，多个返回的时候可以用{}括起来对不同情况的处理，一个返回的时候，直接就省略掉{}.expect多个返回时候，”{“必须和expect同一行    </li>
+<li>发送执行命令指令  </li>
+<li>这里是希望看到执行结果，所以我用了$?这个上次执行结果输出到变量  </li>
+<li>这个指令是指继续留在SSH登陆状态,这里以内执行了exit，直接退出了,interact不起作用  </li>
+<li>执行结束标示，在spawn进程结束后会给expect发送eof  </li>
+<li>给用户提示信息，只作纯文本的提示，像echo一样  </li>
+<li><p>log_file filename会把日志打到filename文本里面，默认是append，所以会有文件大小问题</p>
+<p>一些参考资料<br><a href="http://blog.chinaunix.net/uid-15007890-id-273604.html" target="_blank" rel="external"> expect学习笔记及实例详解 </a><br><a href="http://zhidao.baidu.com/link?url=NTNequSIXB5Hq38HGD1lxCTIXxaC8kKZQUZdNj-EGhu6JZmWMLFyOQmiPdZ4DW-lp0p_rJjzF8MU5tBkVwuaPq" target="_blank" rel="external">通过wait获取返回值</a><br><a href="http://stackoverflow.com/questions/23614039/how-to-get-the-exit-code-of-spawned-process-in-expect-shell-script" target="_blank" rel="external">expect-return-code</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/04/Shell之except模拟交互脚本/" data-id="cij3r0h44002pzi4htvh1vylw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/expect/">expect</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Shell之定时任务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/04/Shell之定时任务/" class="article-date">
@@ -164,7 +359,7 @@ cnt=`lsof -i :<span class="number">9000</span>| grep <span class="string">"(LIST
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之定时任务/" data-id="ciia5wxtd0024hu4hfzozupfn" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之定时任务/" data-id="cij3r0h41002jzi4hvdripfzo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cron/">cron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/定时任务/">定时任务</a></li></ul>
@@ -325,7 +520,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
       
     </div>
     <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Shell之脚本初次/" data-id="ciia5wxtb001zhu4hrp16na30" class="article-share-link">Share</a>
+      <a data-url="superheizai.github.io/2015/12/04/Shell之脚本初次/" data-id="cij3r0h3x002ezi4h0q9574qf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/脚本/">脚本</a></li></ul>
@@ -338,66 +533,9 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
 
 
   
-    <article id="post-Git-多Repo配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/04/Git-多Repo配置/" class="article-date">
-  <time datetime="2015-12-04T05:08:24.000Z" itemprop="datePublished">2015-12-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/git/">git</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/Git-多Repo配置/">Git 多Repo配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在需要连接多个repo的场景下，可以通过添加config文件来解决这个问题，步骤如下：</p>
-<h2 id="生成ssh_key">生成ssh key</h2><pre><code>ssh-keygen -t rsa -C <span class="string">"superheizai"</span> <span class="operator">-f</span> ~/.ssh/github
-
--C ：指的是目标GIT repo的用户名
-<span class="operator">-f</span> ：指的是生成密钥的本地地址
-</code></pre><p>   运行命令后，会在~/.ssh下面生成github私钥和github.pub公钥，把github公钥写到对应的GIT repo配置</p>
-<h2 id="定义config">定义config</h2><p>  在.ssh下面生成一个config文件，里面配置如下信息：    </p>
-<pre><code>host github<span class="class">.com</span> <span class="id">#GIT</span> REPO域名，比如git@github.com中的github<span class="class">.com</span>
- user git  #用户，一般都是这个,比如git@github.com中的git
- hostname github<span class="class">.com</span>  #可选，指向域名，比如git@github.com中的github<span class="class">.com</span>
- port <span class="number">22</span>  #端口，一般不变
- identityfile ~/.ssh/github <span class="id">#ssh</span> key生成的时候，文件路径
-</code></pre><h2 id="测试连通性">测试连通性</h2><p> ssh -T host # host是config里面定义的host</p>
-<p> 如果提示连通，说明生效了  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="superheizai.github.io/2015/12/04/Git-多Repo配置/" data-id="ciia5wxrd0000hu4h9u7wxbqz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多repo/">多repo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -408,7 +546,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/charles/">charles</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/架构/nginx/">nginx</a><span class="category-list-count">1</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/charles/">charles</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/架构/ELK/">ELK</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/nginx/">nginx</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -417,7 +555,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kibana/">kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logstash/">logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reset/">reset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/revert/">revert</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回滚/">回滚</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -426,7 +564,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Shell/" style="font-size: 20px;">Shell</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/fiddler/" style="font-size: 10px;">fiddler</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+      <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/Shell/" style="font-size: 15px;">Shell</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/fiddler/" style="font-size: 10px;">fiddler</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/kibana/" style="font-size: 10px;">kibana</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/logstash/" style="font-size: 10px;">logstash</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/reset/" style="font-size: 10px;">reset</a> <a href="/tags/revert/" style="font-size: 10px;">revert</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/回滚/" style="font-size: 10px;">回滚</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
     </div>
   </div>
 
@@ -435,7 +573,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">15</span></li></ul>
     </div>
   </div>
 
@@ -447,23 +585,23 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
       <ul>
         
           <li>
+            <a href="/2016/01/07/git回滚操作/">git回滚操作</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/18/ELK搭建/">ELK搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/18/mysql乐观锁与悲观锁的浅读/">mysql乐观锁与悲观锁的浅读</a>
+          </li>
+        
+          <li>
             <a href="/2015/12/17/charles使用/">charles使用</a>
           </li>
         
           <li>
             <a href="/2015/12/17/修改nginx监听端口/">修改nginx监听端口</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/15/linux常用查看系统日志命令/">linux常用查看系统日志命令</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/14/linux后台任务/">linux后台任务</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/11/回到顶部按钮/">回到顶部按钮</a>
           </li>
         
       </ul>
@@ -494,7 +632,7 @@ expect login_expect <span class="variable">$user</span>  <span class="variable">
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 ；刘建刚<br>
+      &copy; 2016 ；刘建刚<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

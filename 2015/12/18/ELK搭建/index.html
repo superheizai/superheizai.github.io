@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ELK搭建 | superheizai的私人厨房</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="自己的机器上有些nginx，应用服务器和其它agent，我想有个统一的界面，方便去看他们的日志。所以，自己花费了大概两天的时间去搭建这个平台。  
+题外话，为什么花2天时间才搭好了这个平台呢？因为我用的是新版本的ELK，然后按照网上的老版本搭建方法搭建的时候，碰到了各种问题，花了两天时间才弄好。另外，很多资料都是ELK加上redis一起来实现日志平台的，我这里只是搭建一个简单的自用的看日志的工具，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ELK搭建">
+<meta property="og:url" content="superheizai.github.io/2015/12/18/ELK搭建/index.html">
+<meta property="og:site_name" content="superheizai的私人厨房">
+<meta property="og:description" content="自己的机器上有些nginx，应用服务器和其它agent，我想有个统一的界面，方便去看他们的日志。所以，自己花费了大概两天的时间去搭建这个平台。  
+题外话，为什么花2天时间才搭好了这个平台呢？因为我用的是新版本的ELK，然后按照网上的老版本搭建方法搭建的时候，碰到了各种问题，花了两天时间才弄好。另外，很多资料都是ELK加上redis一起来实现日志平台的，我这里只是搭建一个简单的自用的看日志的工具，">
+<meta property="og:updated_time" content="2015-12-18T15:29:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ELK搭建">
+<meta name="twitter:description" content="自己的机器上有些nginx，应用服务器和其它agent，我想有个统一的界面，方便去看他们的日志。所以，自己花费了大概两天的时间去搭建这个平台。  
+题外话，为什么花2天时间才搭好了这个平台呢？因为我用的是新版本的ELK，然后按照网上的老版本搭建方法搭建的时候，碰到了各种问题，花了两天时间才弄好。另外，很多资料都是ELK加上redis一起来实现日志平台的，我这里只是搭建一个简单的自用的看日志的工具，">
+  
+    <link rel="alternative" href="/atom.xml" title="superheizai的私人厨房" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">superheizai的私人厨房</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="superheizai.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ELK搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/18/ELK搭建/" class="article-date">
+  <time datetime="2015-12-18T03:24:06.000Z" itemprop="datePublished">2015-12-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/架构/">架构</a>►<a class="article-category-link" href="/categories/架构/ELK/">ELK</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ELK搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>自己的机器上有些nginx，应用服务器和其它agent，我想有个统一的界面，方便去看他们的日志。所以，自己花费了大概两天的时间去搭建这个平台。  </p>
+<p>题外话，为什么花2天时间才搭好了这个平台呢？因为我用的是新版本的ELK，然后按照网上的老版本搭建方法搭建的时候，碰到了各种问题，花了两天时间才弄好。另外，很多资料都是ELK加上redis一起来实现日志平台的，我这里只是搭建一个简单的自用的看日志的工具，所以没有把redis加进来。 </p>
+<p>现在这些应用只是起来了，是不是真正解决了问题，还不确定。还需要以后继续深入学习，看看后续是不是需要新增功能，或者把redis加进来。  </p>
+<h2 id="准备">准备</h2><p>既然是学习性质的，所以希望更有些前瞻性，基本上所有的套件都是最新的。各个套件的版本如下：  </p>
+<ul>
+<li>logstash=&gt;2.1.1  </li>
+<li>elasticsearch=&gt;2.1.0   </li>
+<li>kibana=&gt;4.3.0  </li>
+</ul>
+<p>这三个套件均可直接从<a href="https://www.elastic.co/downloads" target="_blank" rel="external">elasic.io</a>上下载  </p>
+<p>另外，elasticsearch对JDK的推荐是1.8。使用1.7的话，要修改JAVA_OPTS，增加JAVA启动参数。而且，后面每次执行命令，都会提示让我升级，所以就切换到了1.8.  </p>
+<a id="more"></a>
+<h2 id="logstash">logstash</h2><p>logstash用来收集日志,并把日志发送到elasticsearch去。其启动方式我不写出来了，较之以往并没有什么改变。<br>logstash里面<a href="https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html" target="_blank" rel="external">elasticsearch相关配置</a>。注意两点，之前的host和端口是单独的配置项，现在要用hosts，是个array配置项。另外，即使这个端口提供http服务是9200，不是9300。下面是我的关于logstash的配置：</p>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="name">input</span> &#123;</span><br><span class="line"></span><br><span class="line">    file &#123;</span><br><span class="line">      type =&gt; <span class="string">"nginx.error"</span></span><br><span class="line">      path =&gt; [<span class="string">"/apps/svr/nginx/logs/nginx_error.log"</span>]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="name">file</span> &#123;</span><br><span class="line">      type =&gt; <span class="string">"nginx.access"</span></span><br><span class="line">      path =&gt; [<span class="string">"/apps/svr/nginx/logs/access.log"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="name">output</span> &#123;</span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">    hosts =&gt; [<span class="string">"127.0.0.1:9200"</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="elasticsearch">elasticsearch</h2><p>elasticsearch是基于lucence的搜索引擎。<br>我两天的时间大多是花在elasticsearch上面的，主要是几点</p>
+<ol>
+<li>2.1版本基于JDK1.8，在1.7版本下运行需要配置额外的参数。在设置端口命令的时候，也会碰到其它错误。所以，索性升级到1.8版本  </li>
+<li>网上的资料都是启动起来就可以直接访问9200端口，但是我尝试了多种方法，比如添加防火墙端口，关掉防火墙都不行，后来通过nginx做端口映射，访问到了这个地址。最后，看到了关于2.0版本以后的特性，就是新版本只暴露9200给localhost，如果通过其它ip访问，需要配置host.name属性  </li>
+<li>不能通过root用户来运行elasticsearch</li>
+<li><p>需要把相应的kibana使用的索引先建立起来，要不然在kibana里面 ，看不到任何索引.比如，curl -XPUT ‘<a href="http://localhost:9200/logstash-2015.12.18" target="_blank" rel="external">http://localhost:9200/logstash-2015.12.18</a>‘ 就建立了logstash使用的一个索引文件</p>
+<p><a href="https://www.elastic.co/blog/elasticsearch-unplugged" target="_blank" rel="external">ES2.0改变特性</a></p>
+</li>
+</ol>
+<h2 id="kibana">kibana</h2><p>kibana现在自带web模块，可以直接运行，前两步搞定，这里不需要花很多时间setup。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="superheizai.github.io/2015/12/18/ELK搭建/" data-id="cij3r0h220000zi4haf7krg5m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ELK/">ELK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kibana/">kibana</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logstash/">logstash</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/07/git回滚操作/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          git回滚操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/18/mysql乐观锁与悲观锁的浅读/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mysql乐观锁与悲观锁的浅读</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/hexo/">hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/charles/">charles</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/架构/ELK/">ELK</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/nginx/">nginx</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cut/">cut</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/">expect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kibana/">kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/">logrotate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logstash/">logstash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reset/">reset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/revert/">revert</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台任务/">后台任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回到顶部/">回到顶部</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回滚/">回滚</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多repo/">多repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/定时任务/">定时任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/引用类型/">引用类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口/">端口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/脚本/">脚本</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/Shell/" style="font-size: 15px;">Shell</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/cut/" style="font-size: 10px;">cut</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/fiddler/" style="font-size: 10px;">fiddler</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/kibana/" style="font-size: 10px;">kibana</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/logstash/" style="font-size: 10px;">logstash</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/reset/" style="font-size: 10px;">reset</a> <a href="/tags/revert/" style="font-size: 10px;">revert</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/后台任务/" style="font-size: 10px;">后台任务</a> <a href="/tags/回到顶部/" style="font-size: 10px;">回到顶部</a> <a href="/tags/回滚/" style="font-size: 10px;">回滚</a> <a href="/tags/多repo/" style="font-size: 10px;">多repo</a> <a href="/tags/定时任务/" style="font-size: 10px;">定时任务</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/引用类型/" style="font-size: 10px;">引用类型</a> <a href="/tags/端口/" style="font-size: 10px;">端口</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">15</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/01/07/git回滚操作/">git回滚操作</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/18/ELK搭建/">ELK搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/18/mysql乐观锁与悲观锁的浅读/">mysql乐观锁与悲观锁的浅读</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/17/charles使用/">charles使用</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/17/修改nginx监听端口/">修改nginx监听端口</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="linkslist">
+  <p class="asidetitle">links</p>
+    <ul>
+    
+      <li><a href="http://zipperary.com/" target="_blank" title="Zippera&#39;s Blog">Zippera&#39;s Blog</a></li>
+    
+      <li><a href="http://github.com" target="_blank" title="本博客托管在github pages">github</a></li>
+    
+      <li><a href="http://hexo.io" target="_blank" title="本博客使用hexo搭建">hexo</a></li>
+    
+    </ul>
+</div>
+
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 ；刘建刚<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//7xoxy0.com1.z0.glb.clouddn.com/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/totop.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
